@@ -432,7 +432,7 @@ make_secret = function(n_chars, valid_chars) {
     valid_chars = strsplit(VALID_EXPR_CHARS, "")[[1]]
   }
 
-  chars = sample(valid_chars, n_chars, replace=T)
+  chars = sample(valid_chars, n_chars, replace=TRUE)
   return(paste(chars, collapse=""))
 }
 
@@ -478,5 +478,5 @@ results_to_list = function(results) {
 #' @export
 results_to_json = function(results) {
   results = results_to_list(results)
-  return(jsonlite::toJSON(results, auto_unbox = T, pretty = T))
+  return(jsonlite::toJSON(results, auto_unbox = TRUE, pretty = TRUE))
 }
