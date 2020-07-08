@@ -376,7 +376,7 @@ run_gradescope = function(script_path, secret) {
   }
   results = grade_script(script_path, "/autograder/source/tests/*.[Rr]", secret)
   results = results_to_list(results)
-  return(jsonlite::toJSON(results), auto_unbox=TRUE, pretty=TRUE)
+  return(jsonlite::toJSON(results, auto_unbox=TRUE, pretty=TRUE))
 }
 
 
