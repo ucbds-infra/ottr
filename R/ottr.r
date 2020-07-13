@@ -450,6 +450,7 @@ make_secret = function(n_chars, valid_chars) {
 #'
 #' @param results The list of `test_suite_result`s
 #' @return The generated list
+#' @export
 results_to_list = function(results) {
   out = list()
   out[["tests"]] = list()
