@@ -17,5 +17,4 @@ RoxygenNote: 7.1.0
 Imports:
   yaml,
   testthat,
-  methods,
   jsonlite
