@@ -426,7 +426,7 @@ update_ast_check_calls = function(tree, list_name) {
       if (length(call) >= 3) {
         pkg = call[[2]]
         fn = call[[3]]
-        if (pkg == "otter" && fn == "check") {
+        if (pkg == "ottr" && fn == "check") {
           env = new.env()
           env$list_name = list_name
           env$list_idx = list_idx
