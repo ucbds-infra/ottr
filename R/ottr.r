@@ -287,7 +287,7 @@ check = function(test_file, test_env, show_results) {
 #' Execute a string as an R script and return the environment from that execution.
 #'
 #' Converts a string to an AST and executes that script in a dummy environment for running test cases
-#' against. Transforms all expressions of the form `. = otter::check(...)` by replacing the `.` with
+#' against. Transforms all expressions of the form `. = ottr::check(...)` by replacing the `.` with
 #' an index into a list in the environment with name `check_results_{SECRET}` to collect the
 #' test_suite_result objects generated from those checks. (This helps to handle variable name collisions
 #' in tests when grading a script.)
@@ -308,7 +308,7 @@ execute_script = function(script, secret, ignore_errors) {
   # create check result collection list name as expression
   list_name = parse(text=paste0("check_results_", secret))[[1]]
 
-  # wrap calls of form `. = otter::check(...)` to append to list and convert back to string
+  # wrap calls of form `. = ottr::check(...)` to append to list and convert back to string
   tree = update_ast_check_calls(tree, list_name)
   updated_script = paste(tree, collapse="\n")
 
@@ -407,11 +407,11 @@ run_gradescope = function(script_path, secret, ignore_errors, test_dir) {
 # Utilities
 #---------------------------------------------------------------------------------------------------
 
-#' Traverse an AST (a list of expressions) and change calls of the form `. = otter::check(...)` so
+#' Traverse an AST (a list of expressions) and change calls of the form `. = ottr::check(...)` so
 #' that they are appended to a list with name `list_name`.
 #'
-#' If `list_name` is `check_results_XX`, then `. = otter::check(...)` becomes
-#' `check_results_XX[[<int>]] = otter::check(...)`, where `<int>` is an integer
+#' If `list_name` is `check_results_XX`, then `. = ottr::check(...)` becomes
+#' `check_results_XX[[<int>]] = ottr::check(...)`, where `<int>` is an integer
 #'
 #' @param tree The tree to traverse
 #' @param list_name The quoted name of the list
