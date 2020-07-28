@@ -5,7 +5,7 @@
 \title{Run autograder in a Gradescope container and return the results as a properly-formatted JSON
 string}
 \usage{
-run_gradescope(script_path, secret)
+run_gradescope(script_path, secret, ignore_errors, test_dir)
 }
 \arguments{
 \item{script_path}{The path to the script}
