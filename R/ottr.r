@@ -366,7 +366,7 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
   tests_glob = Sys.glob(tests_glob)
   i = 1
   for (test_file in tests_glob) {
-    already_tested = sapply(results, function(r) tolower(r$filename))
+    already_tested = sapply(results, function(r) r$filename)
     if (!(basename(test_file) %in% already_tested)) {
       results[[i + num_embedded_tests]] = check(test_file, test_env, FALSE)
       i = i + 1
