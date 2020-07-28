@@ -296,7 +296,12 @@ check = function(test_file, test_env, show_results) {
 #' @param secret The string to be appended to the name `check_results_` as the list name to collect
 #' results
 #' @return The global environment after executing the script
-execute_script = function(script, secret) {
+execute_script = function(script, secret, ignore_errors) {
+
+  if (missing(ignore_errors)) {
+    ignore_errors = TRUE
+  }
+
   # convert script to a list of expressions
   tree = as.list(parse(text=script))
 
@@ -316,7 +321,11 @@ execute_script = function(script, secret) {
     for (expr in as.list(parse(text=updated_script))) {
       tryCatch(
         eval(expr, envir=test_env),
-        error = function(e){}
+        error = function(e){
+          if (!ignore_errors) {
+            stop(e)
+          }
+        }
       )
     }
   })
