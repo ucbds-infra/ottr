@@ -383,7 +383,7 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
 #' results (optional)
 #' @return The JSON string
 #' @export
-run_gradescope = function(script_path, secret, ignore_errors) {
+run_gradescope = function(script_path, secret, ignore_errors, test_dir) {
   if (missing(secret)) {
     secret = make_secret()
   }
@@ -392,7 +392,11 @@ run_gradescope = function(script_path, secret, ignore_errors) {
     ignore_errors = TRUE
   }
 
-  results = grade_script(script_path, "/autograder/source/tests/*.[Rr]", secret, ignore_errors)
+  if (missing(test_dir)) {
+    test_dir = "/autograder/source/tests"
+  }
+
+  results = grade_script(script_path, paste0(test_dir, "/*.[Rr]"), secret, ignore_errors)
   # results = results_to_list(results)
   results = results_to_json(results)
   return(results)
