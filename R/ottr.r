@@ -342,7 +342,7 @@ execute_script = function(script, secret, ignore_errors) {
 #' @return The list of test_suite_result objects after executing tests referenced in the script
 #' and those specified by `tests_glob`
 #' @export
-grade_script = function(script_path, tests_glob, secret) {
+grade_script = function(script_path, tests_glob, secret, ignore_errors) {
   # convert script to a string
   script = paste(readLines(script_path), collapse="\n")
 
@@ -351,9 +351,13 @@ grade_script = function(script_path, tests_glob, secret) {
     secret = make_secret()
   }
 
+  if (missing(ignore_errors)) {
+    ignore_errors = TRUE
+  }
+
   # run the script and extract results from env, capturing stdout
   testthat::capture_output({
-    test_env = execute_script(script, secret)
+    test_env = execute_script(script, secret, ignore_errors)
     results = test_env[[paste0("check_results_", secret)]]
   })
 
@@ -379,11 +383,16 @@ grade_script = function(script_path, tests_glob, secret) {
 #' results (optional)
 #' @return The JSON string
 #' @export
-run_gradescope = function(script_path, secret) {
+run_gradescope = function(script_path, secret, ignore_errors) {
   if (missing(secret)) {
     secret = make_secret()
   }
-  results = grade_script(script_path, "/autograder/source/tests/*.[Rr]", secret)
+
+  if (missing(ignore_errors)) {
+    ignore_errors = TRUE
+  }
+
+  results = grade_script(script_path, "/autograder/source/tests/*.[Rr]", secret, ignore_errors)
   # results = results_to_list(results)
   results = results_to_json(results)
   return(results)
