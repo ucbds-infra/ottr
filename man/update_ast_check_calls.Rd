@@ -2,7 +2,7 @@
 % Please edit documentation in R/ottr.r
 \name{update_ast_check_calls}
 \alias{update_ast_check_calls}
-\title{Traverse an AST (a list of expressions) and change calls of the form \code{. = otter::check(...)} so
+\title{Traverse an AST (a list of expressions) and change calls of the form \code{. = ottr::check(...)} so
 that they are appended to a list with name \code{list_name}.}
 \usage{
 update_ast_check_calls(tree, list_name)
@@ -16,6 +16,6 @@ update_ast_check_calls(tree, list_name)
 The tree with substitutions made
 }
 \description{
-If \code{list_name} is \code{check_results_XX}, then \code{. = otter::check(...)} becomes
-\verb{check_results_XX[[<int>]] = otter::check(...)}, where \verb{<int>} is an integer
+If \code{list_name} is \code{check_results_XX}, then \code{. = ottr::check(...)} becomes
+\verb{check_results_XX[[<int>]] = ottr::check(...)}, where \verb{<int>} is an integer
 }

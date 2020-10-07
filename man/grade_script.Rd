@@ -5,7 +5,7 @@
 \title{Execute a script, parse check outputs, and run additional tests specified by the glob pattern
 \code{tests_glob} on the test environment.}
 \usage{
-grade_script(script_path, tests_glob, secret)
+grade_script(script_path, tests_glob, secret, ignore_errors)
 }
 \arguments{
 \item{script_path}{The path to the script}

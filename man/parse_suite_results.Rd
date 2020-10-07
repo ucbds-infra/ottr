@@ -5,10 +5,12 @@
 \title{Parse output from \code{testthat::ListReporter} and return an instance of the ref class test_suite_results
 constructed from this output}
 \usage{
-parse_suite_results(suite_results, test_metadata, num_cases)
+parse_suite_results(suite_results, test_file, test_metadata, num_cases)
 }
 \arguments{
 \item{suite_results}{The output from a \code{testthat::ListReporter} as a list}
+
+\item{test_file}{The filename of the test file summarized by these results}
 
 \item{test_metadata}{The parsed metadata from the test suite}
 
