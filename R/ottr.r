@@ -192,10 +192,11 @@ get_case_metadata = function(test_metadata, case_name) {
 #' constructed from this output
 #'
 #' @param suite_results The output from a `testthat::ListReporter` as a list
+#' @param test_file The filename of the test file summarized by these results
 #' @param test_metadata The parsed metadata from the test suite
 #' @param num_cases The number of test cases in the suite
 #' @return The parsed results for the test suite
-parse_suite_results = function(suite_results, test_metadata, num_cases) {
+parse_suite_results = function(suite_results, test_file, test_metadata, num_cases) {
   # initialize values
   num_passed_tests = 0
   results = list()
@@ -221,7 +222,7 @@ parse_suite_results = function(suite_results, test_metadata, num_cases) {
   result = test_suite_result(
     case_results=results,
     metadata=test_metadata,
-    filename=suite_results[[1]]$file
+    filename=test_file
   )
 
   return(result)
@@ -272,7 +273,7 @@ check = function(test_file, test_env, show_results) {
   })
 
   # parse the output from ListReporter into test_suite_result object
-  suite_results = parse_suite_results(suite_results, test_metadata, num_cases)
+  suite_results = parse_suite_results(suite_results, test_file, test_metadata, num_cases)
   suite_results$raw_results = lr$results$as_list()
 
   # print out suite_results if show_results is TRUE
