@@ -18,3 +18,5 @@ Imports:
   yaml,
   testthat,
   jsonlite
+Suggests:
+  testthat
