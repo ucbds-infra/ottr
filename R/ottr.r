@@ -6,96 +6,148 @@
 # Helpful Global Variables
 #---------------------------------------------------------------------------------------------------
 
-VALID_EXPR_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLKMNOPQRSTUVWXYZ1234567890._"
+#' A string containing characters that can be made into a valid variable name. Does not include any
+#' digits because randomly sampling with them included could result in an invalid variable name.
+VALID_EXPR_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLKMNOPQRSTUVWXYZ._"
 
 
 #---------------------------------------------------------------------------------------------------
 # Helpful Classes for Storing Suite and Case Results
 #---------------------------------------------------------------------------------------------------
 
-test_case_result = setRefClass(
-  "test_example",
-  fields = c("name", "result", "hidden", "passed", "points"),
-  methods = list(
-    repr = function() {
-      if (passed) return("All tests passed!")
-      output = ""
-      for (j in seq_along(result)) {
-        test_name = result[[j]]$test
-        if (!methods::is(result[[j]], "expectation_success")) {
-          test_output = paste0("    ", paste(strsplit(as.character(result[[j]]), "\n")[[1]], collapse="\n    "))
-          output = paste0(
-            output,
-            "Test ", test_name, " failed:\n",
-            test_output
-          )
-        }
-      }
-      return(output)
+#' A test case for Ottr. Contains configurations and code to be executed for the test.
+#'
+#' @param name The name of the test case
+#' @param code The code to be executed as part of the test case
+#' @param points The point value of the test case
+#' @param hidden Whether the test case is hidden
+#' @param success_message A message to show to students if the test passes
+#' @param failure_message A message to show to students if the test fails
+#' @export
+TestCase = R6::R6Class(
+  "TestCase",
+  public = list(
+    name = NA,
+    code = NA,
+    results = NA,
+    points = NA,
+    hidden = NA,
+    success_message = NA,
+    failure_message = NA,
+    initialize = function(name, code, points=1, hidden=FALSE, success_message=NA, failure_message=NA) {
+      self$name = name
+      self$code = substitute(code)
+      self$points = points
+      self$hidden = hidden
+      self$success_message = success_message
+      self$failure_message = failure_message
     },
-    get_points = function() points,
-    get_name = function() name,
-    get_score = function() ifelse(passed, points, 0)
+    run = function(env) {
+      error = NULL
+      tryCatch(
+        eval(self$code, envir=env, enclos=baseenv()),
+        error = function(e) error <<- e
+      )
+      return(error)
+    }
   )
 )
 
-test_suite_result = setRefClass(
-  "test_suite_result",
-  fields = c("case_results", "raw_results", "filename", "metadata"),
-  methods = list(
+
+#' A utility class for tracking the results of a `TestCase`
+#'
+#' @param passed Whether the test passed
+#' @param error An error raised by executing the test, if any
+#' @param test_case The `TestCase` that this result tracks
+TestCaseResult = R6::R6Class(
+  "TestCaseResult",
+  public = list(
+    passed = NA,
+    error = NA,
+    test_case = NA,
+    initialize = function(passed, error, test_case) {
+      self$passed = passed
+      self$error = error
+      self$test_case = test_case
+    },
+    get_score = function() {
+      if (self$passed) {
+        return(self$test_case$points)
+      } else {
+        return(0)
+      }
+    },
+    repr = function() {
+      if (self$passed) return("All tests passed!")
+      indented_message = paste(strsplit(self$error$message, "\n")[[1]], collapse="\n  ")
+      output = paste0("Test ", self$test_case$name, " failed:\n", indented_message)
+      return(output)
+    }
+  )
+)
+
+
+#' A collection of test case results that correspond to a single test file
+#'
+#' @param test_case_results The `TestCaseResult` objects that make up this test file
+#' @param filename The name of the test file
+TestFileResult = R6::R6Class(
+  "TestFileResult",
+  public = list(
+    test_case_results = NA,
+    filename = NA,
+    initialize = function(test_case_results, filename) {
+      self$test_case_results = test_case_results
+      self$filename = filename
+    },
+    get_basename = function() basename(self$filename),
+    get_score = function() {
+      earned = 0; possible = 0;
+      for (tcr in self$test_case_results) {
+        earned = earned + tcr$get_score()
+        possible = possible + tcr$test_case$points
+      }
+      return(ifelse(possible == 0, 0, earned / possible))
+    },
     repr = function() {
       # if all tests passed, just return that
-      if (get_score() == 1) {
+      if (self$get_score() == 1) {
         return("All tests passed!")
       }
 
       # otherwise, iterate through results and put hints together
       output = c()
-      for (result in case_results) {
-        if (!result$passed) {
-          output = c(output, result$repr())
+      for (tcr in self$test_case_results) {
+        if (!tcr$passed) {
+          output = c(output, tcr$repr())
         }
       }
       return(paste0(output, collapse="\n\n"))
     },
     failed_hidden_cases = function() {
-      cases = c()
-      for (case_result in case_results) {
-        meta = get_case_metadata(metadata, case_result$name)
-        if (meta[["hidden"]] && !case_result$passed) {
-          cases = c(cases, case_result)
+      tcrs = c()
+      for (tcr in self$test_case_results) {
+        if (tcr$test_case$hidden && !tcr$passed) {
+          tcrs = c(tcrs, tcr)
         }
       }
-      return(cases)
+      return(tcrs)
     },
     failed_public_cases = function() {
-      cases = c()
-      for (case_result in case_results) {
-        meta = get_case_metadata(metadata, case_result$name)
-        if (!meta[["hidden"]] && !case_result$passed) {
-          cases = c(cases, case_result)
+      tcrs = c()
+      for (tcr in self$test_case_results) {
+        if (!tcr$test_case$hidden && !tcr$passed) {
+          tcrs = c(tcrs, tcr)
         }
       }
-      return(cases)
-    },
-    get_score = function() {
-      earned = 0; possible = 0;
-      for (case in case_results) {
-        earned = earned + case$get_score()
-        possible = possible + case$get_points()
-      }
-      return(ifelse(possible == 0, 0, earned / possible))
-    },
-    get_name = function() {
-      return(metadata[["name"]])
+      return(tcrs)
     },
     get_points = function() {
-      return(sum(sapply(case_results, getElement, "points")))
+      return(sum(sapply(sapply(self$test_case_results, getElement, "test_case"), getElement, "points")))
     },
-    get_basename = function() filename,
     failed_any_public = function() {
-      for (result in case_results) {
-        if (!result$hidden && !result$passed) {
+      for (tcr in self$test_case_results) {
+        if (!tcr$test_case$hidden && !tcr$passed) {
           return(TRUE)
         }
       }
@@ -109,123 +161,25 @@ test_suite_result = setRefClass(
 # Test Metadata and Result Parsers and Getters
 #---------------------------------------------------------------------------------------------------
 
-#' Load test suite metadata from a file
+#' Loads test case data from a test file. Executes the file and grabs the global `test` variable,
+#' which should be a `list`.
 #'
-#' Executes the script FILE expression-by-expression and extracts the global variable test_metadata.
-#' This string is run through a YAML parser to construct a list containing the metadata specifications
-#' for that test suite. The global key `name` should be defined and `cases` should be a list of
-#' dictionaries with keys `name` and `hidden`. The key `case[[int]][["name"]]` should match a name
-#' passed to a call to test_that.
-#'
-#' For example, the test suite might have the following contents:
-#'
-#' ```r
-#' library(testthat)
-#'
-#' test_metadata = "
-#' name: q1
-#' cases:
-#'   - name: q1a
-#'     hidden: false
-#'   - name: q1b
-#'     hidden: true
-#' "
-#'
-#' test_that("q1a", {...})
-#'
-#' test_that("q1b", {...})
-#' ```
-#'
-#' @param file Path to a test suite file
-#' @return The parse test suite metadata
-load_test_metadata = function(file) {
+#' @param test_file The path to the test file
+#' @return The test cases
+load_test_cases = function(test_file) {
   env = new.env()
 
-  exps = parse(file=file)
+  exps = parse(file=test_file)
 
   for (i in seq_along(exps)) {
     exp = exps[i]
-    tryCatch(
-      eval(exp, envir=env),
-      error = function(e) {}
-    )
+    eval(exp, envir=env)
   }
 
-  return(yaml::yaml.load(env$test_metadata))
-}
-
-#' Get the entry for the test case with name `case_name` from `test_metadata`
-#'
-#' @param test_metadata The parsed test metadata
-#' @param case_name The name of the desired case
-#' @return The configuration for test case CASE_NAME
-get_case_metadata = function(test_metadata, case_name) {
-  cases = test_metadata[["cases"]]
-  for (l in cases) {
-    if (l[["name"]] == case_name) {
-      return(l)
-    }
+  if (!("test" %in% names(env))) {
+    stop(paste0("Test file does not declare a global test variable: ", test_file))
   }
-  stop(paste0("Test case ", case_name, " not found"))
-}
-
-# PYTHONIC STRUCTURE OF suite_results:
-#   suite_results = [
-#     {
-#       "file": file_name,
-#       "test": test_name,
-#       "results": [  # this key is case_results
-#         {
-#           "message": test_output,
-#           "test": test_name
-#         }
-#       ]
-#     }
-#   ]
-#
-# Notes:
-# - suite_results corresponds to a whole test file
-# - case_results corresponds to a single test_that call within the test file
-# - case_results[int] corresponds to a single expectation within a test_that block
-
-#' Parse output from `testthat::ListReporter` and return an instance of the ref class test_suite_results
-#' constructed from this output
-#'
-#' @param suite_results The output from a `testthat::ListReporter` as a list
-#' @param test_file The filename of the test file summarized by these results
-#' @param test_metadata The parsed metadata from the test suite
-#' @param num_cases The number of test cases in the suite
-#' @return The parsed results for the test suite
-parse_suite_results = function(suite_results, test_file, test_metadata, num_cases) {
-  # initialize values
-  num_passed_tests = 0
-  results = list()
-
-  for (i in seq_along(suite_results)) {
-    case_results = suite_results[[i]]$results
-
-    # test case passes if all its expectations passed
-    passed = all(sapply(case_results, methods::is, "expectation_success"))
-
-    # create a test_case_result instance for this test_that call
-    hidden = get_case_metadata(test_metadata, suite_results[[i]]$test)[["hidden"]]
-    points = get_case_metadata(test_metadata, suite_results[[i]]$test)[["points"]]
-    results[[i]] = test_case_result(name=suite_results[[i]]$test, result=case_results,
-                                    hidden=hidden, passed=passed, points=points)
-    num_passed_tests = num_passed_tests + ifelse(passed, 1, 0)
-  }
-
-  # calculate % score for this test file: number passed cases / number of cases
-  test_score = ifelse(num_cases == 0, 0, num_passed_tests / num_cases)
-
-  # create a test_suite_result instance
-  result = test_suite_result(
-    case_results=results,
-    metadata=test_metadata,
-    filename=test_file
-  )
-
-  return(result)
+  return(env$test)
 }
 
 
@@ -245,7 +199,7 @@ check = function(test_file, test_env, show_results) {
 
   # need to specify a test file
   if (missing(test_file)) {
-      stop("must have a test file")
+    stop("must have a test file")
   }
 
   # if show_results is not passed, default to TRUE
@@ -253,37 +207,39 @@ check = function(test_file, test_env, show_results) {
     show_results = TRUE
   }
 
-  # load test metadata from test file
-  test_metadata = load_test_metadata(test_file)
-
   # grab the calling frame
   if (missing(test_env)) {
     test_env = parent.frame(1)
   }
 
+  # copy the env
+  test_env = clone_env(test_env)
+
+  test_case_results = c()
+
   # redirect stdout so that testthat doesn't print
   testthat::capture_output({
-    # get number of test cases in test_file
-    num_cases = length(testthat::test_file(test_file, reporter = "minimal"))
+    # read the test cases from the test file
+    test_cases = load_test_cases(test_file)$cases
 
-    # test the variables in test_env
-    lr <- testthat::ListReporter$new()
-    out <- testthat::test_file(test_file, reporter = lr, env = test_env)
-    suite_results <- lr$results$as_list()
+    # run the tests
+    for (tc in test_cases) {
+      err = tc$run(test_env)
+      test_case_results = c(test_case_results, TestCaseResult$new(is.null(err), err, tc))
+    }
   })
 
-  # parse the output from ListReporter into test_suite_result object
-  suite_results = parse_suite_results(suite_results, test_file, test_metadata, num_cases)
-  suite_results$raw_results = lr$results$as_list()
+  file_result = TestFileResult$new(test_case_results, test_file)
 
   # print out suite_results if show_results is TRUE
   if (show_results) {
-    cat(suite_results$repr())
+    cat(file_result$repr())
   }
 
   # return the test suite results
-  return(suite_results)
+  return(file_result)
 }
+
 
 #' Execute a string as an R script and return the environment from that execution.
 #'
@@ -333,6 +289,7 @@ execute_script = function(script, secret, ignore_errors) {
   return(test_env)
 }
 
+
 #' Execute a script, parse check outputs, and run additional tests specified by the glob pattern
 #' `tests_glob` on the test environment.
 #'
@@ -376,6 +333,7 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
   return(results)
 }
 
+
 #' Run autograder in a Gradescope container and return the results as a properly-formatted JSON
 #' string
 #'
@@ -407,6 +365,41 @@ run_gradescope = function(script_path, secret, ignore_errors, test_dir) {
 #---------------------------------------------------------------------------------------------------
 # Utilities
 #---------------------------------------------------------------------------------------------------
+
+#' Clones an environment, either a deep or shallow copy.
+#'
+#' @param env The environment to clone
+#' @param deep Whether to perform a deep copy
+#' @return The cloned environment
+clone_env <- function(env, deep = FALSE) {
+  # create new environment with same parent
+  clone <- new.env(parent = parent.env(env))
+  for(obj in ls(env, all.names = TRUE)) {
+    promise_lgl <- pryr:::is_promise2(as.symbol(obj), env = env)
+    if(promise_lgl) {
+      # fetch promise expression, we use bquote to feed the right unquoted
+      # value to substitute
+      promise_expr <- eval(bquote(substitute(.(as.symbol(obj)), env = env)))
+      # Assign this expression as a promise (delayed assignment) in our
+      # cloned environment
+      eval(bquote(
+        delayedAssign(obj, .(promise_expr), eval.env = env, assign.env = clone)))
+    } else {
+      obj_val <- get(obj, envir = env)
+      if(is.environment(obj_val) && deep) {
+        assign(obj, clone_env(obj_val, deep = TRUE),envir= clone)
+      } else  {
+        assign(obj, obj_val, envir= clone)
+      }
+    }
+  }
+  attributes(clone) <- attributes(env)
+  return(clone)
+}
+
+
+# TODO: convert update_ast_check_calls to also work for calls that aren't in assignment statements
+# (i.e.. `ottr::check(...)`, not `. = ottr::check(...)`)
 
 #' Traverse an AST (a list of expressions) and change calls of the form `. = ottr::check(...)` so
 #' that they are appended to a list with name `list_name`.
@@ -442,6 +435,7 @@ update_ast_check_calls = function(tree, list_name) {
   return(tree)
 }
 
+
 #' Randomly generate a string of `n_chars` sampled at random from `valid_chars`.
 #'
 #' @param n_chars The number of characters in the string; defaults to 6
@@ -459,6 +453,7 @@ make_secret = function(n_chars, valid_chars) {
   chars = sample(valid_chars, n_chars, replace=TRUE)
   return(paste(chars, collapse=""))
 }
+
 
 # GRADESCOPE OUTPUT FORMAT:
 #   output["tests"] += [{
@@ -495,6 +490,7 @@ results_to_list = function(results) {
   }
   return(out)
 }
+
 
 #' Export a list of `test_suite_result`s to a JSON string
 #'

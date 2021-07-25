@@ -1,6 +1,6 @@
 Package: ottr
 Title: What the Package Does (One Line, Title Case)
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: 
     person(given = "Chris",
            family = "Pyles",
@@ -17,6 +17,8 @@ RoxygenNote: 7.1.1
 Imports:
   yaml,
   testthat,
-  jsonlite
+  jsonlite,
+  pryr,
+  R6
 Suggests:
   testthat
