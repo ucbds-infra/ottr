@@ -29,7 +29,6 @@ TestCase = R6::R6Class(
   public = list(
     name = NA,
     code = NA,
-    results = NA,
     points = NA,
     hidden = NA,
     success_message = NA,
@@ -49,6 +48,16 @@ TestCase = R6::R6Class(
         error = function(e) error <<- e
       )
       return(error)
+    },
+    to_list = function() {
+      return(list(
+        name = self$name,
+        code = deparse1(self$code, collapse="\n"),
+        points = self$points,
+        hidden = self$hidden,
+        success_message = self$success_message,
+        failure_message = self$failure_message
+      ))
     }
   )
 )
@@ -78,10 +87,17 @@ TestCaseResult = R6::R6Class(
       }
     },
     repr = function() {
-      if (self$passed) return("All tests passed!")
+      if (self$passed) return(paste0("Test ", self$test_case$name, " passed"))
       indented_message = paste(strsplit(self$error$message, "\n")[[1]], collapse="\n  ")
       output = paste0("Test ", self$test_case$name, " failed:\n", indented_message)
       return(output)
+    },
+    to_list = function() {
+      return(list(
+        passed = self$passed,
+        error = self$error$message,
+        test_case = self$test_case$to_list()
+      ))
     }
   )
 )
@@ -118,9 +134,9 @@ TestFileResult = R6::R6Class(
       # otherwise, iterate through results and put hints together
       output = c()
       for (tcr in self$test_case_results) {
-        if (!tcr$passed) {
-          output = c(output, tcr$repr())
-        }
+        # if (!tcr$passed) {
+        output = c(output, tcr$repr())
+        # }
       }
       return(paste0(output, collapse="\n\n"))
     },
@@ -152,6 +168,16 @@ TestFileResult = R6::R6Class(
         }
       }
       return(FALSE);
+    },
+    to_list = function() {
+      tcr_lists = list()
+      for (i in seq_along(self$test_case_results)) {
+        tcr_lists[[i]] = self$test_case_results[[i]]$to_list()
+      }
+      return(list(
+        filename = self$filename,
+        test_case_results = tcr_lists
+      ))
     }
   )
 )
