@@ -16,7 +16,7 @@ grade_script(script_path, tests_glob, secret, ignore_errors)
 results (optional)}
 }
 \value{
-The list of test_suite_result objects after executing tests referenced in the script
+The list of \code{TestFileResult} objects after executing tests referenced in the script
 and those specified by \code{tests_glob}
 }
 \description{

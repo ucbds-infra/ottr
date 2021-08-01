@@ -2,17 +2,18 @@
 % Please edit documentation in R/ottr.r
 \name{TestCase}
 \alias{TestCase}
-\title{A test case for Ottr. Contains configurations and code to be executed by testthat.}
+\title{A test case for Ottr. Contains configurations and code to be executed for the test.}
 \description{
-A test case for Ottr. Contains configurations and code to be executed by testthat.
+A test case for Ottr. Contains configurations and code to be executed for the test.
 
-A test case for Ottr. Contains configurations and code to be executed by testthat.
+A test case for Ottr. Contains configurations and code to be executed for the test.
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{TestCase$new()}}
 \item \href{#method-run}{\code{TestCase$run()}}
+\item \href{#method-to_list}{\code{TestCase$to_list()}}
 \item \href{#method-clone}{\code{TestCase$clone()}}
 }
 }
@@ -36,7 +37,7 @@ A test case for Ottr. Contains configurations and code to be executed by testtha
 \describe{
 \item{\code{name}}{The name of the test case}
 
-\item{\code{code}}{The code to be executed by \code{testthat::test_that} as part of the test case}
+\item{\code{code}}{The code to be executed as part of the test case}
 
 \item{\code{points}}{The point value of the test case}
 
@@ -55,6 +56,15 @@ A test case for Ottr. Contains configurations and code to be executed by testtha
 \subsection{Method \code{run()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCase$run(env)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-to_list"></a>}}
+\if{latex}{\out{\hypertarget{method-to_list}{}}}
+\subsection{Method \code{to_list()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{TestCase$to_list()}\if{html}{\out{</div>}}
 }
 
 }

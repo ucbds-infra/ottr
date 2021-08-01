@@ -2,18 +2,26 @@
 % Please edit documentation in R/ottr.r
 \name{results_to_list}
 \alias{results_to_list}
-\title{Convert a list of \code{test_suite_result} objects to a JSON-like object of the correct form for writing
+\title{Convert a list of \code{TestFileResult} objects to a JSON-like object of the correct form for writing
 results for Gradescope.}
 \usage{
 results_to_list(results)
 }
 \arguments{
-\item{results}{The list of \code{test_suite_result}s}
+\item{results}{The list of \code{TestFileResult}s}
 }
 \value{
 The generated list
 }
 \description{
-Convert a list of \code{test_suite_result} objects to a JSON-like object of the correct form for writing
-results for Gradescope.
+The returned list has the JSON format
+}
+\details{
+{
+"test_file_results": \link[=
+    {
+      // output of TestFileResults$to_list
+    }
+  ]{ { // output of TestFileResults$to_list } }
+}
 }

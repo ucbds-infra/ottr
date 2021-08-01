@@ -2,7 +2,7 @@
 % Please edit documentation in R/ottr.r
 \name{check}
 \alias{check}
-\title{Execute checks in a test suite and return the test_suite_result object from executing the test.
+\title{Execute checks in a test suite and return the \code{TestFileResult} object from executing the test.
 Optionally prints results of the test to console.}
 \usage{
 check(test_file, test_env, show_results)
@@ -18,6 +18,6 @@ check(test_file, test_env, show_results)
 The parsed test results for the suite
 }
 \description{
-Execute checks in a test suite and return the test_suite_result object from executing the test.
+Execute checks in a test suite and return the \code{TestFileResult} object from executing the test.
 Optionally prints results of the test to console.
 }

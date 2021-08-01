@@ -14,6 +14,7 @@ A utility class for tracking the results of a \code{TestCase}
 \item \href{#method-new}{\code{TestCaseResult$new()}}
 \item \href{#method-get_score}{\code{TestCaseResult$get_score()}}
 \item \href{#method-repr}{\code{TestCaseResult$repr()}}
+\item \href{#method-to_list}{\code{TestCaseResult$to_list()}}
 \item \href{#method-clone}{\code{TestCaseResult$clone()}}
 }
 }
@@ -29,6 +30,8 @@ A utility class for tracking the results of a \code{TestCase}
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{passed}}{Whether the test passed}
+
+\item{\code{error}}{An error raised by executing the test, if any}
 
 \item{\code{test_case}}{The \code{TestCase} that this result tracks}
 }
@@ -50,6 +53,15 @@ A utility class for tracking the results of a \code{TestCase}
 \subsection{Method \code{repr()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$repr()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-to_list"></a>}}
+\if{latex}{\out{\hypertarget{method-to_list}{}}}
+\subsection{Method \code{to_list()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$to_list()}\if{html}{\out{</div>}}
 }
 
 }

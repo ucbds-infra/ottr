@@ -2,11 +2,11 @@
 % Please edit documentation in R/ottr.r
 \name{TestFileResult}
 \alias{TestFileResult}
-\title{Returns the name of the file this test came from}
+\title{A collection of test case results that correspond to a single test file}
 \description{
-Returns the name of the file this test came from
+A collection of test case results that correspond to a single test file
 
-Returns the name of the file this test came from
+A collection of test case results that correspond to a single test file
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -19,6 +19,7 @@ Returns the name of the file this test came from
 \item \href{#method-failed_public_cases}{\code{TestFileResult$failed_public_cases()}}
 \item \href{#method-get_points}{\code{TestFileResult$get_points()}}
 \item \href{#method-failed_any_public}{\code{TestFileResult$failed_any_public()}}
+\item \href{#method-to_list}{\code{TestFileResult$to_list()}}
 \item \href{#method-clone}{\code{TestFileResult$clone()}}
 }
 }
@@ -30,6 +31,15 @@ Returns the name of the file this test came from
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$new(test_case_results, filename)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{test_case_results}}{The \code{TestCaseResult} objects that make up this test file}
+
+\item{\code{filename}}{The name of the test file}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_basename"></a>}}
@@ -91,6 +101,15 @@ Returns the name of the file this test came from
 \subsection{Method \code{failed_any_public()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$failed_any_public()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-to_list"></a>}}
+\if{latex}{\out{\hypertarget{method-to_list}{}}}
+\subsection{Method \code{to_list()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$to_list()}\if{html}{\out{</div>}}
 }
 
 }
