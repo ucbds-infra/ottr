@@ -213,7 +213,7 @@ load_test_cases = function(test_file) {
 # Executors and Graders
 #---------------------------------------------------------------------------------------------------
 
-#' Execute checks in a test suite and return the test_suite_result object from executing the test.
+#' Execute checks in a test suite and return the `TestFileResult` object from executing the test.
 #' Optionally prints results of the test to console.
 #'
 #' @param test_file Path to a test file
@@ -272,7 +272,7 @@ check = function(test_file, test_env, show_results) {
 #' Converts a string to an AST and executes that script in a dummy environment for running test cases
 #' against. Transforms all expressions of the form `. = ottr::check(...)` by replacing the `.` with
 #' an index into a list in the environment with name `check_results_{SECRET}` to collect the
-#' test_suite_result objects generated from those checks. (This helps to handle variable name collisions
+#' `TestFileResult` objects generated from those checks. (This helps to handle variable name collisions
 #' in tests when grading a script.)
 #'
 #' @param script The string to be executed
@@ -323,14 +323,14 @@ execute_script = function(script, secret, ignore_errors) {
 #' @param tests_glob The pattern to search for extra tests
 #' @param secret The string to be appended to the name `check_results_` as the list name to collect
 #' results (optional)
-#' @return The list of test_suite_result objects after executing tests referenced in the script
+#' @return The list of `TestFileResult` objects after executing tests referenced in the script
 #' and those specified by `tests_glob`
 #' @export
 grade_script = function(script_path, tests_glob, secret, ignore_errors) {
   # convert script to a string
   script = paste(readLines(script_path), collapse="\n")
 
-  # create a secret with if unspecified
+  # create a secret with make_secret if unspecified
   if (missing(secret)) {
     secret = make_secret()
   }
@@ -342,21 +342,21 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
   # run the script and extract results from env, capturing stdout
   testthat::capture_output({
     test_env = execute_script(script, secret, ignore_errors)
-    results = test_env[[paste0("check_results_", secret)]]
+    test_file_results = test_env[[paste0("check_results_", secret)]]
   })
 
-  # run the tests in tests_glob on the env, collect in results
-  num_embedded_tests = length(results)
+  # run the tests in tests_glob on the env, collect in test_file_results
+  num_embedded_tests = length(test_file_results)
   tests_glob = Sys.glob(tests_glob)
   i = 1
   for (test_file in tests_glob) {
-    already_tested = sapply(results, function(r) basename(r$filename))
+    already_tested = sapply(test_file_results, function(tfr) tfr$get_basename())
     if (!(basename(test_file) %in% already_tested)) {
-      results[[i + num_embedded_tests]] = check(test_file, test_env, FALSE)
+      test_file_results[[i + num_embedded_tests]] = check(test_file, test_env, FALSE)
       i = i + 1
     }
   }
-  return(results)
+  return(test_file_results)
 }
 
 
@@ -368,7 +368,7 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
 #' results (optional)
 #' @return The JSON string
 #' @export
-run_gradescope = function(script_path, secret, ignore_errors, test_dir) {
+run_autograder = function(script_path, secret, ignore_errors, test_dir) {
   if (missing(secret)) {
     secret = make_secret()
   }
@@ -381,10 +381,9 @@ run_gradescope = function(script_path, secret, ignore_errors, test_dir) {
     test_dir = "/autograder/source/tests"
   }
 
-  results = grade_script(script_path, paste0(test_dir, "/*.[Rr]"), secret, ignore_errors)
-  # results = results_to_list(results)
-  results = results_to_json(results)
-  return(results)
+  test_file_results = grade_script(script_path, paste0(test_dir, "/*.[Rr]"), secret, ignore_errors)
+  test_file_results = results_to_json(test_file_results)
+  return(test_file_results)
 }
 
 
@@ -490,35 +489,50 @@ make_secret = function(n_chars, valid_chars) {
 #     "output": repr(scores[key]["test"])
 #   }]
 
-#' Convert a list of `test_suite_result` objects to a JSON-like object of the correct form for writing
+#' Convert a list of `TestFileResult` objects to a JSON-like object of the correct form for writing
 #' results for Gradescope.
 #'
-#' @param results The list of `test_suite_result`s
+#' The returned list has the JSON format
+#'
+#' {
+#'   "test_file_results": [
+#'     {
+#'       // output of TestFileResults$to_list
+#'     }
+#'   ]
+#' }
+#'
+#' @param results The list of `TestFileResult`s
 #' @return The generated list
 #' @export
 results_to_list = function(results) {
-  out = list()
-  out[["tests"]] = list()
-  out_idx = 1
+  out = list(
+    test_file_results = list()
+  )
   for (i in seq_along(results)) {
-    suite_results = results[[i]]
-    for (j in seq_along(suite_results$case_results)) {
-      case_results = suite_results$case_results[[j]]
-      l = list()
-      l[["name"]] = case_results$get_name()
-      l[["score"]] = case_results$get_score()
-      l[["max_score"]] = case_results$get_points()
-      l[["visibility"]] = ifelse(case_results$hidden, "hidden", "visible")
-      l[["output"]] = case_results$repr()
-      out[["tests"]][[out_idx]] = l
-      out_idx = out_idx + 1
-    }
+    out$test_file_results[[i]] = results[[i]]$to_list()
   }
+  # out[["tests"]] = list()
+  # out_idx = 1
+  # for (i in seq_along(results)) {
+  #   suite_results = results[[i]]
+  #   for (j in seq_along(suite_results$case_results)) {
+  #     case_results = suite_results$case_results[[j]]
+  #     l = list()
+  #     l[["name"]] = case_results$get_name()
+  #     l[["score"]] = case_results$get_score()
+  #     l[["max_score"]] = case_results$get_points()
+  #     l[["visibility"]] = ifelse(case_results$hidden, "hidden", "visible")
+  #     l[["output"]] = case_results$repr()
+  #     out[["tests"]][[out_idx]] = l
+  #     out_idx = out_idx + 1
+  #   }
+  # }
   return(out)
 }
 
 
-#' Export a list of `test_suite_result`s to a JSON string
+#' Export a list of `TestFileResult` objects to a JSON string
 #'
 #' @param results The list of result objects
 #' @return The JSON string
