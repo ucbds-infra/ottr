@@ -17,11 +17,12 @@ The generated list
 The returned list has the JSON format
 }
 \details{
-{
-"test_file_results": \link[=
-    {
+\preformatted{\{
+  "test_file_results": [
+    \{
       // output of TestFileResults$to_list
-    }
-  ]{ { // output of TestFileResults$to_list } }
+    \}
+  ]
+\}
 }
 }

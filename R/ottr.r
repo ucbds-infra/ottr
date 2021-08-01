@@ -494,6 +494,7 @@ make_secret = function(n_chars, valid_chars) {
 #'
 #' The returned list has the JSON format
 #'
+#' ```
 #' {
 #'   "test_file_results": [
 #'     {
@@ -501,6 +502,7 @@ make_secret = function(n_chars, valid_chars) {
 #'     }
 #'   ]
 #' }
+#' ```
 #'
 #' @param results The list of `TestFileResult`s
 #' @return The generated list
