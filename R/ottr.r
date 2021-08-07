@@ -210,11 +210,12 @@ load_test_cases = function(test_file) {
   test_suite = env$test
   if (is.na(test_suite$name)) {
     test_suite$name = basename(test_file)
-    for (i in seq_along(test_suite$cases)) {
-      tc = test_suite$cases[[i]]
-      if (is.na(tc$name)) {
-        tc$name = paste(test_suite$name, i)
-      }
+  }
+
+  for (i in seq_along(test_suite$cases)) {
+    tc = test_suite$cases[[i]]
+    if (is.na(tc$name)) {
+      tc$name = paste(test_suite$name, "-", i)
     }
   }
 
