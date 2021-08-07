@@ -52,7 +52,7 @@ TestCase = R6::R6Class(
     to_list = function() {
       return(list(
         name = self$name,
-        code = deparse1(self$code, collapse="\n"),
+        code = paste(deparse(self$code), collapse="\n"),
         points = self$points,
         hidden = self$hidden,
         success_message = self$success_message,
