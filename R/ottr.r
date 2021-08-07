@@ -95,7 +95,8 @@ TestCaseResult = R6::R6Class(
     to_list = function() {
       return(list(
         passed = self$passed,
-        error = self$error$message,
+        # don't put NULL because jsonlite turns it into {}
+        error = ifelse(is.null(self$error$message), "", self$error$message),
         test_case = self$test_case$to_list()
       ))
     }
