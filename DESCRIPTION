@@ -1,15 +1,14 @@
 Package: ottr
-Title: What the Package Does (One Line, Title Case)
-Version: 0.1.0
+Title: An R autograding extension for Otter-Grader
+Version: 1.0.0
 Authors@R: 
     person(given = "Chris",
            family = "Pyles",
+           email = "otter-grader@berkeley.edu",
            role = c("aut", "cre"),
-           email = "cpyles@berkeley.edu",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+License: BSD 3-Clause License
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -17,6 +16,8 @@ RoxygenNote: 7.1.1
 Imports:
   yaml,
   testthat,
-  jsonlite
+  jsonlite,
+  pryr,
+  R6
 Suggests:
   testthat

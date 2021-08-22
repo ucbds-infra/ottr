@@ -2,7 +2,7 @@
 % Please edit documentation in R/ottr.r
 \name{results_to_json}
 \alias{results_to_json}
-\title{Export a list of \code{test_suite_result}s to a JSON string}
+\title{Export a list of \code{TestFileResult} objects to a JSON string}
 \usage{
 results_to_json(results)
 }
@@ -13,5 +13,5 @@ results_to_json(results)
 The JSON string
 }
 \description{
-Export a list of \code{test_suite_result}s to a JSON string
+Export a list of \code{TestFileResult} objects to a JSON string
 }
