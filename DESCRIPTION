@@ -2,7 +2,7 @@ Package: ottr
 Title: An R autograding extension for Otter-Grader
 Version: 1.0.0
 Authors@R: 
-    person(given = "Chris",
+    person(given = "Christopher",
            family = "Pyles",
            email = "otter-grader@berkeley.edu",
            role = c("aut", "cre"),
