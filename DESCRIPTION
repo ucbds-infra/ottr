@@ -1,6 +1,6 @@
 Package: ottr
 Title: An R autograding extension for Otter-Grader
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person(given = "Chris",
            family = "Pyles",
