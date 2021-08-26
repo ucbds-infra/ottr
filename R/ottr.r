@@ -290,6 +290,7 @@ check = function(test_file, test_env, show_results) {
 #' @param script The string to be executed
 #' @param secret The string to be appended to the name `check_results_` as the list name to collect
 #' results
+#' @param ignore_errors Whether to ignore errors thrown while executing the script
 #' @return The global environment after executing the script
 execute_script = function(script, secret, ignore_errors) {
 
@@ -335,6 +336,7 @@ execute_script = function(script, secret, ignore_errors) {
 #' @param tests_glob The pattern to search for extra tests
 #' @param secret The string to be appended to the name `check_results_` as the list name to collect
 #' results (optional)
+#' @param ignore_errors Whether to ignore errors thrown while executing the script
 #' @return The list of `TestFileResult` objects after executing tests referenced in the script
 #' and those specified by `tests_glob`
 grade_script = function(script_path, tests_glob, secret, ignore_errors) {
@@ -377,6 +379,8 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
 #' @param script_path The path to the script
 #' @param secret The string to be appended to the name `check_results_` as the list name to collect
 #' results (optional)
+#' @param ignore_errors Whether to ignore errors thrown while executing the script
+#' @param test_dir A directory of tests to glob from
 #' @return The JSON string
 #' @export
 run_autograder = function(script_path, secret, ignore_errors, test_dir) {
