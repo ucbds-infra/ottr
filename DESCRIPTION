@@ -1,5 +1,5 @@
 Package: ottr
-Title: Ottr: An R autograding extension for Otter-Grader
+Title: An R Autograding Extension for Otter-Grader
 Version: 1.0.1
 Authors@R: 
     person(given = "Christopher",
@@ -8,9 +8,9 @@ Authors@R:
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8520-7593"))
 Description:
-    Ottr is an R autograding extension for Otter-Grader. It supports grading
-    R scripts, RMarkdown documents, and R Jupyter Notebooks.
-License: BSD-3-Clause + file LICENSE
+    This package is an R autograding extension for Otter-Grader. It supports 
+    grading R scripts, RMarkdown documents, and R Jupyter Notebooks.
+License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
