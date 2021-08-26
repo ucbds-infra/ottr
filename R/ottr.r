@@ -254,7 +254,7 @@ check = function(test_file, test_env, show_results) {
   }
 
   # copy the env
-  test_env = clone_env(test_env)
+  test_env = Rfast::env.copy(test_env, all.names=TRUE)
 
   test_case_results = c()
 
@@ -404,38 +404,6 @@ run_autograder = function(script_path, secret, ignore_errors, test_dir) {
 #---------------------------------------------------------------------------------------------------
 # Utilities
 #---------------------------------------------------------------------------------------------------
-
-#' Clones an environment, either a deep or shallow copy.
-#'
-#' @param env The environment to clone
-#' @param deep Whether to perform a deep copy
-#' @return The cloned environment
-clone_env <- function(env, deep = FALSE) {
-  # create new environment with same parent
-  clone <- new.env(parent = parent.env(env))
-  for(obj in ls(env, all.names = TRUE)) {
-    promise_lgl <- pryr:::is_promise2(as.symbol(obj), env = env)
-    if(promise_lgl) {
-      # fetch promise expression, we use bquote to feed the right unquoted
-      # value to substitute
-      promise_expr <- eval(bquote(substitute(.(as.symbol(obj)), env = env)))
-      # Assign this expression as a promise (delayed assignment) in our
-      # cloned environment
-      eval(bquote(
-        delayedAssign(obj, .(promise_expr), eval.env = env, assign.env = clone)))
-    } else {
-      obj_val <- get(obj, envir = env)
-      if(is.environment(obj_val) && deep) {
-        assign(obj, clone_env(obj_val, deep = TRUE),envir= clone)
-      } else  {
-        assign(obj, obj_val, envir= clone)
-      }
-    }
-  }
-  attributes(clone) <- attributes(env)
-  return(clone)
-}
-
 
 # TODO: convert update_ast_check_calls to also work for calls that aren't in assignment statements
 # (i.e.. `ottr::check(...)`, not `. = ottr::check(...)`)
