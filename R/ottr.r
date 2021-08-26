@@ -253,9 +253,6 @@ check = function(test_file, test_env, show_results) {
     test_env = parent.frame(1)
   }
 
-  # copy the env
-  test_env = Rfast::env.copy(test_env, all.names=TRUE)
-
   test_case_results = c()
 
   # redirect stdout so that testthat doesn't print
