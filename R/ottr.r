@@ -253,9 +253,6 @@ check = function(test_file, test_env, show_results) {
     test_env = parent.frame(1)
   }
 
-  # copy the env
-  test_env = clone_env(test_env)
-
   test_case_results = c()
 
   # redirect stdout so that testthat doesn't print
@@ -293,6 +290,7 @@ check = function(test_file, test_env, show_results) {
 #' @param script The string to be executed
 #' @param secret The string to be appended to the name `check_results_` as the list name to collect
 #' results
+#' @param ignore_errors Whether to ignore errors thrown while executing the script
 #' @return The global environment after executing the script
 execute_script = function(script, secret, ignore_errors) {
 
@@ -338,9 +336,9 @@ execute_script = function(script, secret, ignore_errors) {
 #' @param tests_glob The pattern to search for extra tests
 #' @param secret The string to be appended to the name `check_results_` as the list name to collect
 #' results (optional)
+#' @param ignore_errors Whether to ignore errors thrown while executing the script
 #' @return The list of `TestFileResult` objects after executing tests referenced in the script
 #' and those specified by `tests_glob`
-#' @export
 grade_script = function(script_path, tests_glob, secret, ignore_errors) {
   # convert script to a string
   script = paste(readLines(script_path), collapse="\n")
@@ -381,6 +379,8 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
 #' @param script_path The path to the script
 #' @param secret The string to be appended to the name `check_results_` as the list name to collect
 #' results (optional)
+#' @param ignore_errors Whether to ignore errors thrown while executing the script
+#' @param test_dir A directory of tests to glob from
 #' @return The JSON string
 #' @export
 run_autograder = function(script_path, secret, ignore_errors, test_dir) {
@@ -405,38 +405,6 @@ run_autograder = function(script_path, secret, ignore_errors, test_dir) {
 #---------------------------------------------------------------------------------------------------
 # Utilities
 #---------------------------------------------------------------------------------------------------
-
-#' Clones an environment, either a deep or shallow copy.
-#'
-#' @param env The environment to clone
-#' @param deep Whether to perform a deep copy
-#' @return The cloned environment
-clone_env <- function(env, deep = FALSE) {
-  # create new environment with same parent
-  clone <- new.env(parent = parent.env(env))
-  for(obj in ls(env, all.names = TRUE)) {
-    promise_lgl <- pryr:::is_promise2(as.symbol(obj), env = env)
-    if(promise_lgl) {
-      # fetch promise expression, we use bquote to feed the right unquoted
-      # value to substitute
-      promise_expr <- eval(bquote(substitute(.(as.symbol(obj)), env = env)))
-      # Assign this expression as a promise (delayed assignment) in our
-      # cloned environment
-      eval(bquote(
-        delayedAssign(obj, .(promise_expr), eval.env = env, assign.env = clone)))
-    } else {
-      obj_val <- get(obj, envir = env)
-      if(is.environment(obj_val) && deep) {
-        assign(obj, clone_env(obj_val, deep = TRUE),envir= clone)
-      } else  {
-        assign(obj, obj_val, envir= clone)
-      }
-    }
-  }
-  attributes(clone) <- attributes(env)
-  return(clone)
-}
-
 
 # TODO: convert update_ast_check_calls to also work for calls that aren't in assignment statements
 # (i.e.. `ottr::check(...)`, not `. = ottr::check(...)`)
@@ -521,7 +489,6 @@ make_secret = function(n_chars, valid_chars) {
 #'
 #' @param results The list of `TestFileResult`s
 #' @return The generated list
-#' @export
 results_to_list = function(results) {
   out = list(
     test_file_results = list()
@@ -529,22 +496,6 @@ results_to_list = function(results) {
   for (i in seq_along(results)) {
     out$test_file_results[[i]] = results[[i]]$to_list()
   }
-  # out[["tests"]] = list()
-  # out_idx = 1
-  # for (i in seq_along(results)) {
-  #   suite_results = results[[i]]
-  #   for (j in seq_along(suite_results$case_results)) {
-  #     case_results = suite_results$case_results[[j]]
-  #     l = list()
-  #     l[["name"]] = case_results$get_name()
-  #     l[["score"]] = case_results$get_score()
-  #     l[["max_score"]] = case_results$get_points()
-  #     l[["visibility"]] = ifelse(case_results$hidden, "hidden", "visible")
-  #     l[["output"]] = case_results$repr()
-  #     out[["tests"]][[out_idx]] = l
-  #     out_idx = out_idx + 1
-  #   }
-  # }
   return(out)
 }
 
@@ -553,7 +504,6 @@ results_to_list = function(results) {
 #'
 #' @param results The list of result objects
 #' @return The JSON string
-#' @export
 results_to_json = function(results) {
   results = results_to_list(results)
   return(jsonlite::toJSON(results, auto_unbox = TRUE, pretty = TRUE))
