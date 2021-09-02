@@ -2,7 +2,7 @@
 % Please edit documentation in R/ottr.r
 \name{export}
 \alias{export}
-\title{Export a Jupyter Notebook in a zip file for submission.}
+\title{Export a Jupyter Notebook to a zip file for submission.}
 \usage{
 export(notebook_path, export_path = NULL, display_link = TRUE)
 }
@@ -14,5 +14,5 @@ export(notebook_path, export_path = NULL, display_link = TRUE)
 \item{display_link}{Whether to display a download link with \code{IRdisplay}}
 }
 \description{
-Export a Jupyter Notebook in a zip file for submission.
+Export a Jupyter Notebook to a zip file for submission.
 }

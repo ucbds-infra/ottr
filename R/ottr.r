@@ -501,7 +501,7 @@ results_to_json = function(results) {
 }
 
 
-#' Export a Jupyter Notebook in a zip file for submission.
+#' Export a Jupyter Notebook to a zip file for submission.
 #'
 #' @param notebook_path The path to the notebook
 #' @param export_path The path at which to write the zip file (optional)
