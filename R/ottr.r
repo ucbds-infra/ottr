@@ -463,15 +463,6 @@ make_secret = function(n_chars, valid_chars) {
 }
 
 
-# GRADESCOPE OUTPUT FORMAT:
-#   output["tests"] += [{
-#     "name" : key + " - Hidden",
-#     "score" : hidden_score,
-#     "max_score": hidden_possible,
-#     "visibility": hidden_test_visibility,
-#     "output": repr(scores[key]["test"])
-#   }]
-
 #' Convert a list of `TestFileResult` objects to a JSON-like object of the correct form for writing
 #' results for Gradescope.
 #'
@@ -507,4 +498,34 @@ results_to_list = function(results) {
 results_to_json = function(results) {
   results = results_to_list(results)
   return(jsonlite::toJSON(results, auto_unbox = TRUE, pretty = TRUE))
+}
+
+
+#' Export a Jupyter Notebook in a zip file for submission.
+#'
+#' @param notebook_path The path to the notebook
+#' @param export_path The path at which to write the zip file (optional)
+#' @param display_link Whether to display a download link with `IRdisplay`
+#' @export
+export = function(notebook_path, export_path=NULL, display_link=TRUE) {
+  timestamp = format(Sys.time(), "%Y_%m_%dT%H_%M_%S")
+
+  if (is.null(export_path)) {
+    notebook_name = tools::file_path_sans_ext(basename(notebook_path))
+    export_path = paste0(notebook_name, "_", timestamp, ".zip")
+  }
+
+  zip_filename_file_name = "__zip_filename__"
+  writeLines(c(export_path), zip_filename_file_name, sep="")
+
+  zip_files = c(zip_filename_file_name, notebook_path)
+  zip::zip(export_path, zip_files)
+  file.remove(zip_filename_file_name)
+
+  if (display_link) {
+    IRdisplay::display_html(sprintf("
+    <p>Your submission has been exported. Click <a href='%s' download='%s'
+    target='_blank'>here</a> to download the zip file.</p>
+    ", export_path, export_path))
+  }
 }
