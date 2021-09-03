@@ -529,3 +529,18 @@ export = function(notebook_path, export_path=NULL, display_link=TRUE) {
     ", export_path, export_path))
   }
 }
+
+
+#' Determine whether a code snippet has any syntax errors.
+#'
+#' @param script The code snippet
+#' @return Whether the code snippet is valid (can be parsed with `parse`)
+#' @export
+valid_syntax = function(script) {
+  error = FALSE
+  tryCatch(
+    parse(text = script),
+    error = function(e) error <<- TRUE
+  )
+  return(!error)
+}
