@@ -14,6 +14,8 @@ grade_script(script_path, tests_glob, secret, ignore_errors)
 
 \item{secret}{The string to be appended to the name \code{check_results_} as the list name to collect
 results (optional)}
+
+\item{ignore_errors}{Whether to ignore errors thrown while executing the script}
 }
 \value{
 The list of \code{TestFileResult} objects after executing tests referenced in the script
