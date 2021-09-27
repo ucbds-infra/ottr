@@ -306,7 +306,6 @@ execute_script = function(script, secret, ignore_errors) {
 
   # wrap calls of form `. = ottr::check(...)` to append to list and convert back to string
   tree = update_ast_check_calls(tree, list_name)
-  updated_script = paste(tree, collapse="\n")
 
   # create dummy env for execution and add check_results_XX list
   test_env = new.env()
@@ -314,7 +313,7 @@ execute_script = function(script, secret, ignore_errors) {
 
   # run the script, capturing stdout, and return the environment
   testthat::capture_output({
-    for (expr in as.list(parse(text=updated_script))) {
+    for (expr in tree) {
       tryCatch(
         eval(expr, envir=test_env),
         error = function(e){
