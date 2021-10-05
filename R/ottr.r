@@ -87,9 +87,12 @@ TestCaseResult = R6::R6Class(
       }
     },
     repr = function() {
-      if (self$passed) return(paste0("Test ", self$test_case$name, " passed"))
+      message = self$get_message()
+      if (is.na(message)) message = ""
+      if (self$passed) return(paste0("Test ", self$test_case$name, " passed\n", message))
       indented_message = paste(strsplit(self$error$message, "\n")[[1]], collapse="\n  ")
-      output = paste0("Test ", self$test_case$name, " failed:\n", indented_message)
+      if (length(message) > 0) message =  paste0(message, "\n")
+      output = paste0("Test ", self$test_case$name, " failed:\n", message, indented_message)
       return(output)
     },
     to_list = function() {
@@ -99,6 +102,10 @@ TestCaseResult = R6::R6Class(
         error = ifelse(is.null(self$error$message), "", self$error$message),
         test_case = self$test_case$to_list()
       ))
+    },
+    get_message = function() {
+      if (self$passed) return(self$test_case$success_message)
+      return(self$test_case$failure_message)
     }
   )
 )
@@ -128,16 +135,20 @@ TestFileResult = R6::R6Class(
     },
     repr = function() {
       # if all tests passed, just return that
+      messages = c()
+      for (tcr in self$test_case_results) {
+        if (!is.na(tcr$get_message())) messages = c(messages, tcr$get_message())
+      }
+      messages = paste(messages, collapse="\n")
+      if (length(messages) > 0) messages = paste0(messages, "\n")
       if (self$get_score() == 1) {
-        return("All tests passed!")
+        return(paste0(messages, "All tests passed!"))
       }
 
       # otherwise, iterate through results and put hints together
       output = c()
       for (tcr in self$test_case_results) {
-        # if (!tcr$passed) {
         output = c(output, tcr$repr())
-        # }
       }
       return(paste0(output, collapse="\n\n"))
     },
