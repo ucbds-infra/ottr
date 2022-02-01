@@ -4,12 +4,12 @@ Version: 1.1.3
 Authors@R: 
     person(given = "Christopher",
            family = "Pyles",
-           email = "otter-grader@berkeley.edu",
+           email = "cpyles@berkeley.edu",
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8520-7593"))
-Maintainer: Christopher Pyles <otter-grader@berkeley.edu>
+Maintainer: Christopher Pyles <cpyles@berkeley.edu>
 Description:
-    This package is an R autograding extension for Otter-Grader (<https://otter-grader.readthedocs.io>). It supports 
+    An R autograding extension for Otter-Grader (<https://otter-grader.readthedocs.io>). It supports 
     grading R scripts, RMarkdown documents, and R Jupyter Notebooks.
 License: file LICENSE
 Encoding: UTF-8
