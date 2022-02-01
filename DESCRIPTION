@@ -13,7 +13,6 @@ Description:
     grading R scripts, RMarkdown documents, and R Jupyter Notebooks.
 License: BSD_3_Clause + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports:
