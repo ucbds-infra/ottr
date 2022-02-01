@@ -11,7 +11,7 @@ Maintainer: Christopher Pyles <cpyles@berkeley.edu>
 Description:
     An R autograding extension for Otter-Grader (<https://otter-grader.readthedocs.io>). It supports 
     grading R scripts, RMarkdown documents, and R Jupyter Notebooks.
-License: file LICENSE
+License: BSD_3_Clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
