@@ -8,6 +8,14 @@ A test case for Ottr. Contains configurations and code to be executed for the te
 
 A test case for Ottr. Contains configurations and code to be executed for the test.
 }
+\examples{
+tc = TestCase$new("q1", {
+  testthat::assert_true(q1.ans)
+})
+env = new.env()
+env$q1.ans = TRUE
+tc$run(env)
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{

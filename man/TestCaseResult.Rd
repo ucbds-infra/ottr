@@ -15,6 +15,7 @@ A utility class for tracking the results of a \code{TestCase}
 \item \href{#method-get_score}{\code{TestCaseResult$get_score()}}
 \item \href{#method-repr}{\code{TestCaseResult$repr()}}
 \item \href{#method-to_list}{\code{TestCaseResult$to_list()}}
+\item \href{#method-get_message}{\code{TestCaseResult$get_message()}}
 \item \href{#method-clone}{\code{TestCaseResult$clone()}}
 }
 }
@@ -62,6 +63,15 @@ A utility class for tracking the results of a \code{TestCase}
 \subsection{Method \code{to_list()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$to_list()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_message"></a>}}
+\if{latex}{\out{\hypertarget{method-get_message}{}}}
+\subsection{Method \code{get_message()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$get_message()}\if{html}{\out{</div>}}
 }
 
 }

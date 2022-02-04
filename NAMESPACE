@@ -2,6 +2,4 @@
 
 export(TestCase)
 export(check)
-export(export)
-export(run_autograder)
 export(valid_syntax)

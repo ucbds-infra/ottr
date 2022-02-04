@@ -24,6 +24,13 @@ VALID_EXPR_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLKMNOPQRSTUVWXYZ._"
 #' @param success_message A message to show to students if the test passes
 #' @param failure_message A message to show to students if the test fails
 #' @export
+#' @examples
+#' tc = TestCase$new("q1", {
+#'   testthat::assert_true(q1.ans)
+#' })
+#' env = new.env()
+#' env$q1.ans = TRUE
+#' tc$run(env)
 TestCase = R6::R6Class(
   "TestCase",
   public = list(
@@ -247,6 +254,10 @@ load_test_cases = function(test_file) {
 #' @param show_results Whether to print the results to stdout
 #' @return The parsed test results for the suite
 #' @export
+#' @examples
+#' \dontrun{
+#' check("tests/q1.R")
+#' }
 check = function(test_file, test_env, show_results) {
 
   # need to specify a test file
@@ -393,6 +404,9 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
 #' @param test_dir A directory of tests to glob from
 #' @return The JSON string
 #' @export
+#' \dontrun{
+#' run_autograder("hw01.R", "ABC123", TRUE, "tests")
+#' }
 run_autograder = function(script_path, secret, ignore_errors, test_dir) {
   if (missing(secret)) {
     secret = make_secret()
@@ -517,6 +531,9 @@ results_to_json = function(results) {
 #' @param export_path The path at which to write the zip file (optional)
 #' @param display_link Whether to display a download link with `IRdisplay`
 #' @export
+#' \dontrun{
+#' export("hw01.ipynb")
+#' }
 export = function(notebook_path, export_path=NULL, display_link=TRUE) {
   timestamp = format(Sys.time(), "%Y_%m_%dT%H_%M_%S")
 
@@ -546,6 +563,20 @@ export = function(notebook_path, export_path=NULL, display_link=TRUE) {
 #' @param script The code snippet
 #' @return Whether the code snippet is valid (can be parsed with `parse`)
 #' @export
+#' @examples
+#' s = "
+#' a = TRUE
+#' b = c(1, 2, 3)
+#' d = function(x) x ^ 2
+#' f = d(b)
+#' "
+#' valid_syntax(s)  # returns TRUE
+#'
+#' s = "
+#' if (TRUE) {
+#'   a = c(1, 2)
+#' "
+#' valid_syntax(s)  # returns FALSE
 valid_syntax = function(script) {
   error = FALSE
   tryCatch(

@@ -21,3 +21,8 @@ The parsed test results for the suite
 Execute checks in a test suite and return the \code{TestFileResult} object from executing the test.
 Optionally prints results of the test to console.
 }
+\examples{
+\dontrun{
+check("tests/q1.R")
+}
+}

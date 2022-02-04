@@ -15,3 +15,18 @@ Whether the code snippet is valid (can be parsed with \code{parse})
 \description{
 Determine whether a code snippet has any syntax errors.
 }
+\examples{
+s = "
+a = TRUE
+b = c(1, 2, 3)
+d = function(x) x ^ 2
+f = d(b)
+"
+valid_syntax(s)  # returns TRUE
+
+s = "
+if (TRUE) {
+  a = c(1, 2)
+"
+valid_syntax(s)  # returns FALSE
+}
