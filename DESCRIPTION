@@ -25,6 +25,7 @@ Imports:
   jsonlite,
   pryr,
   R6,
-  zip
+  zip,
+  methods
 Suggests:
   IRdisplay

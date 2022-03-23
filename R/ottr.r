@@ -446,7 +446,7 @@ update_ast_check_calls = function(tree, list_name) {
   list_idx = 1
   for (i in seq_along(tree)) {
     expr = tree[[i]]
-    if (class(expr) == "=") {
+    if (methods::is(expr, "=")) {
       right_expr = expr[[3]]
       call = right_expr[[1]]
       if (length(call) >= 3) {
