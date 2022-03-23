@@ -98,7 +98,7 @@ TestCaseResult = R6::R6Class(
       if (is.na(message)) message = ""
       if (self$passed) return(paste0("Test ", self$test_case$name, " passed\n", message))
       indented_message = paste(strsplit(self$error$message, "\n")[[1]], collapse="\n  ")
-      if (length(message) > 0) message =  paste0(message, "\n")
+      if (length(message) > 0) message = paste0(message, "\n")
       output = paste0("Test ", self$test_case$name, " failed:\n", message, indented_message)
       return(output)
     },
