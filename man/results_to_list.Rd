@@ -17,12 +17,12 @@ The generated list
 The returned list has the JSON format
 }
 \details{
-\preformatted{\{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{\{
   "test_file_results": [
     \{
       // output of TestFileResults$to_list
     \}
   ]
 \}
-}
+}\if{html}{\out{</div>}}
 }

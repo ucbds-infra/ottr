@@ -24,3 +24,8 @@ The JSON string
 Run autograder in a Gradescope container and return the results as a properly-formatted JSON
 string
 }
+\examples{
+\dontrun{
+run_autograder("hw01.R", "ABC123", TRUE, "tests")
+}
+}

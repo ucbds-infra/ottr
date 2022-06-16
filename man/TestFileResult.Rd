@@ -11,21 +11,21 @@ A collection of test case results that correspond to a single test file
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{TestFileResult$new()}}
-\item \href{#method-get_basename}{\code{TestFileResult$get_basename()}}
-\item \href{#method-get_score}{\code{TestFileResult$get_score()}}
-\item \href{#method-repr}{\code{TestFileResult$repr()}}
-\item \href{#method-failed_hidden_cases}{\code{TestFileResult$failed_hidden_cases()}}
-\item \href{#method-failed_public_cases}{\code{TestFileResult$failed_public_cases()}}
-\item \href{#method-get_points}{\code{TestFileResult$get_points()}}
-\item \href{#method-failed_any_public}{\code{TestFileResult$failed_any_public()}}
-\item \href{#method-to_list}{\code{TestFileResult$to_list()}}
-\item \href{#method-clone}{\code{TestFileResult$clone()}}
+\item \href{#method-TestFileResult-new}{\code{TestFileResult$new()}}
+\item \href{#method-TestFileResult-get_basename}{\code{TestFileResult$get_basename()}}
+\item \href{#method-TestFileResult-get_score}{\code{TestFileResult$get_score()}}
+\item \href{#method-TestFileResult-repr}{\code{TestFileResult$repr()}}
+\item \href{#method-TestFileResult-failed_hidden_cases}{\code{TestFileResult$failed_hidden_cases()}}
+\item \href{#method-TestFileResult-failed_public_cases}{\code{TestFileResult$failed_public_cases()}}
+\item \href{#method-TestFileResult-get_points}{\code{TestFileResult$get_points()}}
+\item \href{#method-TestFileResult-failed_any_public}{\code{TestFileResult$failed_any_public()}}
+\item \href{#method-TestFileResult-to_list}{\code{TestFileResult$to_list()}}
+\item \href{#method-TestFileResult-clone}{\code{TestFileResult$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-TestFileResult-new"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$new(test_case_results, filename)}\if{html}{\out{</div>}}
@@ -42,8 +42,8 @@ A collection of test case results that correspond to a single test file
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_basename"></a>}}
-\if{latex}{\out{\hypertarget{method-get_basename}{}}}
+\if{html}{\out{<a id="method-TestFileResult-get_basename"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-get_basename}{}}}
 \subsection{Method \code{get_basename()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$get_basename()}\if{html}{\out{</div>}}
@@ -51,8 +51,8 @@ A collection of test case results that correspond to a single test file
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_score"></a>}}
-\if{latex}{\out{\hypertarget{method-get_score}{}}}
+\if{html}{\out{<a id="method-TestFileResult-get_score"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-get_score}{}}}
 \subsection{Method \code{get_score()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$get_score()}\if{html}{\out{</div>}}
@@ -60,8 +60,8 @@ A collection of test case results that correspond to a single test file
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-repr"></a>}}
-\if{latex}{\out{\hypertarget{method-repr}{}}}
+\if{html}{\out{<a id="method-TestFileResult-repr"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-repr}{}}}
 \subsection{Method \code{repr()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$repr()}\if{html}{\out{</div>}}
@@ -69,8 +69,8 @@ A collection of test case results that correspond to a single test file
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-failed_hidden_cases"></a>}}
-\if{latex}{\out{\hypertarget{method-failed_hidden_cases}{}}}
+\if{html}{\out{<a id="method-TestFileResult-failed_hidden_cases"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-failed_hidden_cases}{}}}
 \subsection{Method \code{failed_hidden_cases()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$failed_hidden_cases()}\if{html}{\out{</div>}}
@@ -78,8 +78,8 @@ A collection of test case results that correspond to a single test file
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-failed_public_cases"></a>}}
-\if{latex}{\out{\hypertarget{method-failed_public_cases}{}}}
+\if{html}{\out{<a id="method-TestFileResult-failed_public_cases"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-failed_public_cases}{}}}
 \subsection{Method \code{failed_public_cases()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$failed_public_cases()}\if{html}{\out{</div>}}
@@ -87,8 +87,8 @@ A collection of test case results that correspond to a single test file
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_points"></a>}}
-\if{latex}{\out{\hypertarget{method-get_points}{}}}
+\if{html}{\out{<a id="method-TestFileResult-get_points"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-get_points}{}}}
 \subsection{Method \code{get_points()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$get_points()}\if{html}{\out{</div>}}
@@ -96,8 +96,8 @@ A collection of test case results that correspond to a single test file
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-failed_any_public"></a>}}
-\if{latex}{\out{\hypertarget{method-failed_any_public}{}}}
+\if{html}{\out{<a id="method-TestFileResult-failed_any_public"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-failed_any_public}{}}}
 \subsection{Method \code{failed_any_public()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$failed_any_public()}\if{html}{\out{</div>}}
@@ -105,8 +105,8 @@ A collection of test case results that correspond to a single test file
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-to_list"></a>}}
-\if{latex}{\out{\hypertarget{method-to_list}{}}}
+\if{html}{\out{<a id="method-TestFileResult-to_list"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-to_list}{}}}
 \subsection{Method \code{to_list()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$to_list()}\if{html}{\out{</div>}}
@@ -114,8 +114,8 @@ A collection of test case results that correspond to a single test file
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-TestFileResult-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

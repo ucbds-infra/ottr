@@ -11,17 +11,17 @@ A utility class for tracking the results of a \code{TestCase}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{TestCaseResult$new()}}
-\item \href{#method-get_score}{\code{TestCaseResult$get_score()}}
-\item \href{#method-repr}{\code{TestCaseResult$repr()}}
-\item \href{#method-to_list}{\code{TestCaseResult$to_list()}}
-\item \href{#method-get_message}{\code{TestCaseResult$get_message()}}
-\item \href{#method-clone}{\code{TestCaseResult$clone()}}
+\item \href{#method-TestCaseResult-new}{\code{TestCaseResult$new()}}
+\item \href{#method-TestCaseResult-get_score}{\code{TestCaseResult$get_score()}}
+\item \href{#method-TestCaseResult-repr}{\code{TestCaseResult$repr()}}
+\item \href{#method-TestCaseResult-to_list}{\code{TestCaseResult$to_list()}}
+\item \href{#method-TestCaseResult-get_message}{\code{TestCaseResult$get_message()}}
+\item \href{#method-TestCaseResult-clone}{\code{TestCaseResult$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-TestCaseResult-new"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCaseResult-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$new(passed, error, test_case)}\if{html}{\out{</div>}}
@@ -40,8 +40,8 @@ A utility class for tracking the results of a \code{TestCase}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_score"></a>}}
-\if{latex}{\out{\hypertarget{method-get_score}{}}}
+\if{html}{\out{<a id="method-TestCaseResult-get_score"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCaseResult-get_score}{}}}
 \subsection{Method \code{get_score()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$get_score()}\if{html}{\out{</div>}}
@@ -49,8 +49,8 @@ A utility class for tracking the results of a \code{TestCase}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-repr"></a>}}
-\if{latex}{\out{\hypertarget{method-repr}{}}}
+\if{html}{\out{<a id="method-TestCaseResult-repr"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCaseResult-repr}{}}}
 \subsection{Method \code{repr()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$repr()}\if{html}{\out{</div>}}
@@ -58,8 +58,8 @@ A utility class for tracking the results of a \code{TestCase}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-to_list"></a>}}
-\if{latex}{\out{\hypertarget{method-to_list}{}}}
+\if{html}{\out{<a id="method-TestCaseResult-to_list"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCaseResult-to_list}{}}}
 \subsection{Method \code{to_list()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$to_list()}\if{html}{\out{</div>}}
@@ -67,8 +67,8 @@ A utility class for tracking the results of a \code{TestCase}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_message"></a>}}
-\if{latex}{\out{\hypertarget{method-get_message}{}}}
+\if{html}{\out{<a id="method-TestCaseResult-get_message"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCaseResult-get_message}{}}}
 \subsection{Method \code{get_message()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$get_message()}\if{html}{\out{</div>}}
@@ -76,8 +76,8 @@ A utility class for tracking the results of a \code{TestCase}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-TestCaseResult-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCaseResult-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

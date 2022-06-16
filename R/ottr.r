@@ -404,6 +404,7 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
 #' @param test_dir A directory of tests to glob from
 #' @return The JSON string
 #' @export
+#' @examples
 #' \dontrun{
 #' run_autograder("hw01.R", "ABC123", TRUE, "tests")
 #' }
@@ -531,6 +532,7 @@ results_to_json = function(results) {
 #' @param export_path The path at which to write the zip file (optional)
 #' @param display_link Whether to display a download link with `IRdisplay`
 #' @export
+#' @examples
 #' \dontrun{
 #' export("hw01.ipynb")
 #' }

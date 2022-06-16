@@ -19,15 +19,15 @@ tc$run(env)
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{TestCase$new()}}
-\item \href{#method-run}{\code{TestCase$run()}}
-\item \href{#method-to_list}{\code{TestCase$to_list()}}
-\item \href{#method-clone}{\code{TestCase$clone()}}
+\item \href{#method-TestCase-new}{\code{TestCase$new()}}
+\item \href{#method-TestCase-run}{\code{TestCase$run()}}
+\item \href{#method-TestCase-to_list}{\code{TestCase$to_list()}}
+\item \href{#method-TestCase-clone}{\code{TestCase$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-TestCase-new"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCase-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCase$new(
@@ -59,8 +59,8 @@ tc$run(env)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-run"></a>}}
-\if{latex}{\out{\hypertarget{method-run}{}}}
+\if{html}{\out{<a id="method-TestCase-run"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCase-run}{}}}
 \subsection{Method \code{run()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCase$run(env)}\if{html}{\out{</div>}}
@@ -68,8 +68,8 @@ tc$run(env)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-to_list"></a>}}
-\if{latex}{\out{\hypertarget{method-to_list}{}}}
+\if{html}{\out{<a id="method-TestCase-to_list"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCase-to_list}{}}}
 \subsection{Method \code{to_list()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestCase$to_list()}\if{html}{\out{</div>}}
@@ -77,8 +77,8 @@ tc$run(env)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-TestCase-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCase-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

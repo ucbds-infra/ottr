@@ -16,3 +16,8 @@ export(notebook_path, export_path = NULL, display_link = TRUE)
 \description{
 Export a Jupyter Notebook to a zip file for submission.
 }
+\examples{
+\dontrun{
+export("hw01.ipynb")
+}
+}
