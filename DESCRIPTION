@@ -20,10 +20,8 @@ RoxygenNote: 7.2.0
 Depends:
     R (>= 4.0.0)
 Imports:
-  yaml,
   testthat,
   jsonlite,
-  pryr,
   R6,
   zip,
   methods
