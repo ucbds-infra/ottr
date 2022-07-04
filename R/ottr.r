@@ -8,14 +8,14 @@
 
 #' A string containing characters that can be made into a valid variable name. Does not include any
 #' digits because randomly sampling with them included could result in an invalid variable name.
-VALID_EXPR_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLKMNOPQRSTUVWXYZ._"
+VALID_EXPR_CHARS <- "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLKMNOPQRSTUVWXYZ._"
 
 
 #---------------------------------------------------------------------------------------------------
 # Helpful Classes for Storing Suite and Case Results
 #---------------------------------------------------------------------------------------------------
 
-#' A test case for Ottr. Contains configurations and code to be executed for the test.
+#' A test case for ottr. Contains configurations and code to be executed for the test.
 #'
 #' @param name The name of the test case
 #' @param code The code to be executed as part of the test case
@@ -31,7 +31,7 @@ VALID_EXPR_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLKMNOPQRSTUVWXYZ._"
 #' env = new.env()
 #' env$q1.ans = TRUE
 #' tc$run(env)
-TestCase = R6::R6Class(
+TestCase <- R6::R6Class(
   "TestCase",
   public = list(
     name = NA,
@@ -40,26 +40,36 @@ TestCase = R6::R6Class(
     hidden = NA,
     success_message = NA,
     failure_message = NA,
-    initialize = function(name, code, points=1, hidden=FALSE, success_message=NA, failure_message=NA) {
-      self$name = name
-      self$code = substitute(code)
-      self$points = points
-      self$hidden = hidden
-      self$success_message = success_message
-      self$failure_message = failure_message
+
+    initialize = function(
+      name,
+      code,
+      points = 1,
+      hidden = FALSE,
+      success_message = NA,
+      failure_message = NA
+    ) {
+      self$name <- name
+      self$code <- substitute(code)
+      self$points <- points
+      self$hidden <- hidden
+      self$success_message <- success_message
+      self$failure_message <- failure_message
     },
+
     run = function(env) {
-      error = NULL
+      error <- NULL
       tryCatch(
-        eval(self$code, envir=env, enclos=baseenv()),
+        eval(self$code, envir = env, enclos = baseenv()),
         error = function(e) error <<- e
       )
       return(error)
     },
+
     to_list = function() {
       return(list(
         name = self$name,
-        code = paste(deparse(self$code), collapse="\n"),
+        code = paste(deparse(self$code), collapse = "\n"),
         points = self$points,
         hidden = self$hidden,
         success_message = self$success_message,
@@ -75,17 +85,19 @@ TestCase = R6::R6Class(
 #' @param passed Whether the test passed
 #' @param error An error raised by executing the test, if any
 #' @param test_case The `TestCase` that this result tracks
-TestCaseResult = R6::R6Class(
+TestCaseResult <- R6::R6Class(
   "TestCaseResult",
   public = list(
     passed = NA,
     error = NA,
     test_case = NA,
+
     initialize = function(passed, error, test_case) {
-      self$passed = passed
-      self$error = error
-      self$test_case = test_case
+      self$passed <- passed
+      self$error <- error
+      self$test_case <- test_case
     },
+
     get_score = function() {
       if (self$passed) {
         return(self$test_case$points)
@@ -93,15 +105,26 @@ TestCaseResult = R6::R6Class(
         return(0)
       }
     },
+
     repr = function() {
-      message = self$get_message()
-      if (is.na(message)) message = ""
-      if (self$passed) return(paste0("Test ", self$test_case$name, " passed\n", message))
-      indented_message = paste(strsplit(self$error$message, "\n")[[1]], collapse="\n  ")
-      if (length(message) > 0) message = paste0(message, "\n")
-      output = paste0("Test ", self$test_case$name, " failed:\n", message, indented_message)
+      message <- self$get_message()
+      if (is.na(message)) {
+        message <- ""
+      }
+
+      if (self$passed) {
+        return(paste0("Test ", self$test_case$name, " passed\n", message))
+      }
+
+      indented_message <- paste(strsplit(self$error$message, "\n")[[1]], collapse = "\n  ")
+      if (length(message) > 0) {
+        message <- paste0(message, "\n")
+      }
+
+      output <- paste0("Test ", self$test_case$name, " failed:\n", message, indented_message)
       return(output)
     },
+
     to_list = function() {
       return(list(
         passed = self$passed,
@@ -110,8 +133,11 @@ TestCaseResult = R6::R6Class(
         test_case = self$test_case$to_list()
       ))
     },
+
     get_message = function() {
-      if (self$passed) return(self$test_case$success_message)
+      if (self$passed) {
+        return(self$test_case$success_message)
+      }
       return(self$test_case$failure_message)
     }
   )
@@ -122,77 +148,96 @@ TestCaseResult = R6::R6Class(
 #'
 #' @param test_case_results The `TestCaseResult` objects that make up this test file
 #' @param filename The name of the test file
-TestFileResult = R6::R6Class(
+TestFileResult <- R6::R6Class(
   "TestFileResult",
   public = list(
     test_case_results = NA,
     filename = NA,
-    initialize = function(test_case_results, filename) {
-      self$test_case_results = test_case_results
-      self$filename = filename
+
+    initialize = function(filename, test_case_results) {
+      self$filename <- filename
+      self$test_case_results <- test_case_results
     },
+
     get_basename = function() basename(self$filename),
+
     get_score = function() {
-      earned = 0; possible = 0;
+      earned <- 0
+      possible <- 0
       for (tcr in self$test_case_results) {
-        earned = earned + tcr$get_score()
-        possible = possible + tcr$test_case$points
+        earned <- earned + tcr$get_score()
+        possible <- possible + tcr$test_case$points
       }
       return(ifelse(possible == 0, 0, earned / possible))
     },
+
     repr = function() {
       # if all tests passed, just return that
-      messages = c()
+      messages <- c()
       for (tcr in self$test_case_results) {
-        if (!is.na(tcr$get_message())) messages = c(messages, tcr$get_message())
+        if (!is.na(tcr$get_message())) {
+          messages <- c(messages, tcr$get_message())
+        }
       }
-      messages = paste(messages, collapse="\n")
-      if (length(messages) > 0) messages = paste0(messages, "\n")
+
+      messages <- paste(messages, collapse = "\n")
+      if (length(messages) > 0) {
+        messages <- paste0(messages, "\n")
+      }
+
       if (self$get_score() == 1) {
         return(paste0(messages, "All tests passed!"))
       }
 
       # otherwise, iterate through results and put hints together
-      output = c()
+      output <- c()
       for (tcr in self$test_case_results) {
-        output = c(output, tcr$repr())
+        output <- c(output, tcr$repr())
       }
-      return(paste0(output, collapse="\n\n"))
+
+      return(paste0(output, collapse = "\n\n"))
     },
+
     failed_hidden_cases = function() {
-      tcrs = c()
+      tcrs <- c()
       for (tcr in self$test_case_results) {
         if (tcr$test_case$hidden && !tcr$passed) {
-          tcrs = c(tcrs, tcr)
+          tcrs <- c(tcrs, tcr)
         }
       }
       return(tcrs)
     },
+
     failed_public_cases = function() {
-      tcrs = c()
+      tcrs <- c()
       for (tcr in self$test_case_results) {
         if (!tcr$test_case$hidden && !tcr$passed) {
-          tcrs = c(tcrs, tcr)
+          tcrs <- c(tcrs, tcr)
         }
       }
       return(tcrs)
     },
+
     get_points = function() {
-      return(sum(sapply(sapply(self$test_case_results, getElement, "test_case"), getElement, "points")))
+      return(
+        sum(sapply(sapply(self$test_case_results, getElement, "test_case"), getElement, "points")))
     },
+
     failed_any_public = function() {
       for (tcr in self$test_case_results) {
         if (!tcr$test_case$hidden && !tcr$passed) {
           return(TRUE)
         }
       }
-      return(FALSE);
+      return(FALSE)
     },
+
     to_list = function() {
-      tcr_lists = list()
+      tcr_lists <- list()
       for (i in seq_along(self$test_case_results)) {
         tcr_lists[[i]] = self$test_case_results[[i]]$to_list()
       }
+
       return(list(
         filename = self$filename,
         test_case_results = tcr_lists
@@ -211,14 +256,14 @@ TestFileResult = R6::R6Class(
 #'
 #' @param test_file The path to the test file
 #' @return The test cases
-load_test_cases = function(test_file) {
-  env = new.env()
+load_test_cases <- function(test_file) {
+  env <- new.env()
 
-  exps = parse(file=test_file)
+  exps <- parse(file = test_file)
 
   for (i in seq_along(exps)) {
-    exp = exps[i]
-    eval(exp, envir=env)
+    exp <- exps[i]
+    eval(exp, envir = env)
   }
 
   if (!("test" %in% names(env))) {
@@ -226,15 +271,15 @@ load_test_cases = function(test_file) {
   }
 
   # add names to any test cases missing them
-  test_suite = env$test
+  test_suite <- env$test
   if (is.na(test_suite$name)) {
-    test_suite$name = basename(test_file)
+    test_suite$name <- basename(test_file)
   }
 
   for (i in seq_along(test_suite$cases)) {
-    tc = test_suite$cases[[i]]
+    tc <- test_suite$cases[[i]]
     if (is.na(tc$name)) {
-      tc$name = paste(test_suite$name, "-", i)
+      tc$name <- paste(test_suite$name, "-", i)
     }
   }
 
@@ -258,7 +303,7 @@ load_test_cases = function(test_file) {
 #' \dontrun{
 #' check("tests/q1.R")
 #' }
-check = function(test_file, test_env, show_results) {
+check <- function(test_file, test_env, show_results) {
 
   # need to specify a test file
   if (missing(test_file)) {
@@ -267,29 +312,29 @@ check = function(test_file, test_env, show_results) {
 
   # if show_results is not passed, default to TRUE
   if (missing(show_results)) {
-    show_results = TRUE
+    show_results <- TRUE
   }
 
   # grab the calling frame
   if (missing(test_env)) {
-    test_env = parent.frame(1)
+    test_env <- parent.frame(1)
   }
 
-  test_case_results = c()
+  test_case_results <- c()
 
   # redirect stdout so that testthat doesn't print
   testthat::capture_output({
     # read the test cases from the test file
-    test_cases = load_test_cases(test_file)$cases
+    test_cases <- load_test_cases(test_file)$cases
 
     # run the tests
     for (tc in test_cases) {
-      err = tc$run(test_env)
-      test_case_results = c(test_case_results, TestCaseResult$new(is.null(err), err, tc))
+      err <- tc$run(test_env)
+      test_case_results <- c(test_case_results, TestCaseResult$new(is.null(err), err, tc))
     }
   })
 
-  file_result = TestFileResult$new(test_case_results, test_file)
+  file_result <- TestFileResult$new(test_file, test_case_results)
 
   # print out suite_results if show_results is TRUE
   if (show_results) {
@@ -314,31 +359,31 @@ check = function(test_file, test_env, show_results) {
 #' results
 #' @param ignore_errors Whether to ignore errors thrown while executing the script
 #' @return The global environment after executing the script
-execute_script = function(script, secret, ignore_errors) {
+execute_script <- function(script, secret, ignore_errors) {
 
   if (missing(ignore_errors)) {
-    ignore_errors = TRUE
+    ignore_errors <- TRUE
   }
 
   # convert script to a list of expressions
-  tree = as.list(parse(text=script))
+  tree <- as.list(parse(text = script))
 
   # create check result collection list name as expression
-  list_name = parse(text=paste0("check_results_", secret))[[1]]
+  list_name <- parse(text = paste0("check_results_", secret))[[1]]
 
   # wrap calls of form `. = ottr::check(...)` to append to list and convert back to string
-  tree = update_ast_check_calls(tree, list_name)
+  tree <- update_ast_check_calls(tree, list_name)
 
   # create dummy env for execution and add check_results_XX list
-  test_env = new.env()
+  test_env <- new.env()
   test_env[[as.character(list_name)]] = list()
 
   # run the script, capturing stdout, and return the environment
   testthat::capture_output({
     for (expr in tree) {
       tryCatch(
-        eval(expr, envir=test_env),
-        error = function(e){
+        eval(expr, envir = test_env),
+        error = function(e) {
           if (!ignore_errors) {
             stop(e)
           }
@@ -360,36 +405,37 @@ execute_script = function(script, secret, ignore_errors) {
 #' @param ignore_errors Whether to ignore errors thrown while executing the script
 #' @return The list of `TestFileResult` objects after executing tests referenced in the script
 #' and those specified by `tests_glob`
-grade_script = function(script_path, tests_glob, secret, ignore_errors) {
+grade_script <- function(script_path, tests_glob, secret, ignore_errors) {
   # convert script to a string
-  script = paste(readLines(script_path), collapse="\n")
+  script <- paste(readLines(script_path), collapse = "\n")
 
   # create a secret with make_secret if unspecified
   if (missing(secret)) {
-    secret = make_secret()
+    secret <- make_secret()
   }
 
   if (missing(ignore_errors)) {
-    ignore_errors = TRUE
+    ignore_errors <- TRUE
   }
 
   # run the script and extract results from env, capturing stdout
   testthat::capture_output({
-    test_env = execute_script(script, secret, ignore_errors)
-    test_file_results = test_env[[paste0("check_results_", secret)]]
+    test_env <- execute_script(script, secret, ignore_errors)
+    test_file_results <- test_env[[paste0("check_results_", secret)]]
   })
 
   # run the tests in tests_glob on the env, collect in test_file_results
-  num_embedded_tests = length(test_file_results)
-  tests_glob = Sys.glob(tests_glob)
-  i = 1
+  num_embedded_tests <- length(test_file_results)
+  tests_glob <- Sys.glob(tests_glob)
+  i <- 1
   for (test_file in tests_glob) {
-    already_tested = sapply(test_file_results, function(tfr) tfr$get_basename())
+    already_tested <- sapply(test_file_results, function(tfr) tfr$get_basename())
     if (!(basename(test_file) %in% already_tested)) {
-      test_file_results[[i + num_embedded_tests]] = check(test_file, test_env, FALSE)
-      i = i + 1
+      test_file_results[[i + num_embedded_tests]] <- check(test_file, test_env, FALSE)
+      i <- i + 1
     }
   }
+
   return(test_file_results)
 }
 
@@ -408,21 +454,21 @@ grade_script = function(script_path, tests_glob, secret, ignore_errors) {
 #' \dontrun{
 #' run_autograder("hw01.R", "ABC123", TRUE, "tests")
 #' }
-run_autograder = function(script_path, secret, ignore_errors, test_dir) {
+run_autograder <- function(script_path, secret, ignore_errors, test_dir) {
   if (missing(secret)) {
-    secret = make_secret()
+    secret <- make_secret()
   }
 
   if (missing(ignore_errors)) {
-    ignore_errors = TRUE
+    ignore_errors <- TRUE
   }
 
   if (missing(test_dir)) {
-    test_dir = "/autograder/source/tests"
+    test_dir <- "/autograder/source/tests"
   }
 
-  test_file_results = grade_script(script_path, paste0(test_dir, "/*.[Rr]"), secret, ignore_errors)
-  test_file_results = results_to_json(test_file_results)
+  test_file_results <- grade_script(script_path, paste0(test_dir, "/*.[Rr]"), secret, ignore_errors)
+  test_file_results <- results_to_json(test_file_results)
   return(test_file_results)
 }
 
@@ -443,27 +489,27 @@ run_autograder = function(script_path, secret, ignore_errors, test_dir) {
 #' @param tree The tree to traverse
 #' @param list_name The quoted name of the list
 #' @return The tree with substitutions made
-update_ast_check_calls = function(tree, list_name) {
-  list_idx = 1
+update_ast_check_calls <- function(tree, list_name) {
+  list_idx <- 1
   for (i in seq_along(tree)) {
-    expr = tree[[i]]
+    expr <- tree[[i]]
     if (methods::is(expr, "=")) {
-      right_expr = expr[[3]]
-      call = right_expr[[1]]
+      right_expr <- expr[[3]]
+      call <- right_expr[[1]]
       if (length(call) >= 3) {
-        pkg = call[[2]]
-        fn = call[[3]]
+        pkg <- call[[2]]
+        fn <- call[[3]]
         if (pkg == "ottr" && fn == "check") {
-          env = new.env()
-          env$list_name = list_name
-          env$list_idx = list_idx
-          new_left_expr = substitute(list_name[[list_idx]], env)
-          expr[[2]] = new_left_expr
-          list_idx = list_idx + 1
+          env <- new.env()
+          env$list_name <- list_name
+          env$list_idx <- list_idx
+          new_left_expr <- substitute(list_name[[list_idx]], env)
+          expr[[2]] <- new_left_expr
+          list_idx <- list_idx + 1
         }
       }
     }
-    tree[[i]] = expr
+    tree[[i]] <- expr
   }
   return(tree)
 }
@@ -475,16 +521,17 @@ update_ast_check_calls = function(tree, list_name) {
 #' @param valid_chars A string of characters to choose from; defaults to all alphanumerals, `.`, and
 #' `_`
 #' @return The generated string
-make_secret = function(n_chars, valid_chars) {
+make_secret <- function(n_chars, valid_chars) {
   if (missing(n_chars)) {
-    n_chars = 6
-  }
-  if (missing(valid_chars)) {
-    valid_chars = strsplit(VALID_EXPR_CHARS, "")[[1]]
+    n_chars <- 6
   }
 
-  chars = sample(valid_chars, n_chars, replace=TRUE)
-  return(paste(chars, collapse=""))
+  if (missing(valid_chars)) {
+    valid_chars <- strsplit(VALID_EXPR_CHARS, "")[[1]]
+  }
+
+  chars <- sample(valid_chars, n_chars, replace = TRUE)
+  return(paste(chars, collapse = ""))
 }
 
 
@@ -505,12 +552,12 @@ make_secret = function(n_chars, valid_chars) {
 #'
 #' @param results The list of `TestFileResult`s
 #' @return The generated list
-results_to_list = function(results) {
-  out = list(
+results_to_list <- function(results) {
+  out <- list(
     test_file_results = list()
   )
   for (i in seq_along(results)) {
-    out$test_file_results[[i]] = results[[i]]$to_list()
+    out$test_file_results[[i]] <- results[[i]]$to_list()
   }
   return(out)
 }
@@ -520,8 +567,8 @@ results_to_list = function(results) {
 #'
 #' @param results The list of result objects
 #' @return The JSON string
-results_to_json = function(results) {
-  results = results_to_list(results)
+results_to_json <- function(results) {
+  results <- results_to_list(results)
   return(jsonlite::toJSON(results, auto_unbox = TRUE, pretty = TRUE))
 }
 
@@ -536,18 +583,18 @@ results_to_json = function(results) {
 #' \dontrun{
 #' export("hw01.ipynb")
 #' }
-export = function(notebook_path, export_path=NULL, display_link=TRUE) {
-  timestamp = format(Sys.time(), "%Y_%m_%dT%H_%M_%S")
+export <- function(notebook_path, export_path = NULL, display_link = TRUE) {
+  timestamp <- format(Sys.time(), "%Y_%m_%dT%H_%M_%S")
 
   if (is.null(export_path)) {
-    notebook_name = tools::file_path_sans_ext(basename(notebook_path))
-    export_path = paste0(notebook_name, "_", timestamp, ".zip")
+    notebook_name <- tools::file_path_sans_ext(basename(notebook_path))
+    export_path <- paste0(notebook_name, "_", timestamp, ".zip")
   }
 
-  zip_filename_file_name = "__zip_filename__"
-  writeLines(c(export_path), zip_filename_file_name, sep="")
+  zip_filename_file_name <- "__zip_filename__"
+  writeLines(c(export_path), zip_filename_file_name, sep = "")
 
-  zip_files = c(zip_filename_file_name, notebook_path)
+  zip_files <- c(zip_filename_file_name, notebook_path)
   zip::zip(export_path, zip_files)
   file.remove(zip_filename_file_name)
 
@@ -579,8 +626,8 @@ export = function(notebook_path, export_path=NULL, display_link=TRUE) {
 #'   a = c(1, 2)
 #' "
 #' valid_syntax(s)  # returns FALSE
-valid_syntax = function(script) {
-  error = FALSE
+valid_syntax <- function(script) {
+  error <- FALSE
   tryCatch(
     parse(text = script),
     error = function(e) error <<- TRUE

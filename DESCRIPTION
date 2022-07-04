@@ -26,4 +26,6 @@ Imports:
   zip,
   methods
 Suggests:
-  IRdisplay
+  IRdisplay,
+  mockery
+Config/testthat/edition: 3
