@@ -1,0 +1,10 @@
+coverage:
+  status:
+    patch: 
+      default:
+        threshold: 100%
+    project:
+      default:
+        threshold: 100%
+comment:
+  behavior: new

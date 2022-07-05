@@ -3,3 +3,6 @@
 .ionide
 .DS_Store
 ^LICENSE\.md$
+^.lintr$
+^.github$
+^.vscode$

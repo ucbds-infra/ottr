@@ -1,6 +1,6 @@
 Package: ottr
 Title: An R Autograding Extension for Otter-Grader
-Version: 1.1.5
+Version: 1.2.0
 Authors@R: c(
     person(given = "Christopher",
            family = "Pyles",
@@ -12,7 +12,7 @@ Authors@R: c(
 Maintainer: Christopher Pyles <cpyles@berkeley.edu>
 Description:
     An R autograding extension for Otter-Grader (<https://otter-grader.readthedocs.io>). It supports 
-    grading R scripts, RMarkdown documents, and R Jupyter Notebooks.
+    grading R scripts, R Markdown documents, and R Jupyter Notebooks.
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -26,4 +26,8 @@ Imports:
   zip,
   methods
 Suggests:
-  IRdisplay
+  IRdisplay,
+  mockery,
+  stringr,
+  withr
+Config/testthat/edition: 3

@@ -15,3 +15,7 @@ docs/_build
 .Rhistory
 .ionide
 *.Rcheck
+.lintr
+.Rprofile
+*.rds
+/*.tar.gz
