@@ -51,7 +51,7 @@ TestFileResult <- R6::R6Class(
       }
 
       messages <- paste(messages, collapse = "\n")
-      if (length(messages) > 0) {
+      if (messages != "") {
         messages <- paste0(messages, "\n")
       }
 

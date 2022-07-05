@@ -65,7 +65,7 @@ test_that("$repr() returns the string representation of the test file results", 
   # check case when all tests pass
   tfr <- TestFileResult$new(
     "", list(TestCaseResult$new(TRUE, NULL, TestCase$new("", {}, points = 1))))
-  expect_equal(tfr$repr(), "\nAll tests passed!")
+  expect_equal(tfr$repr(), "All tests passed!")
 })
 
 test_that("$to_list() returns the test file results as a list", {
