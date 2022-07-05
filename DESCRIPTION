@@ -1,6 +1,6 @@
 Package: ottr
 Title: An R Autograding Extension for Otter-Grader
-Version: 1.1.5
+Version: 1.2.0
 Authors@R: c(
     person(given = "Christopher",
            family = "Pyles",
@@ -27,5 +27,6 @@ Imports:
   methods
 Suggests:
   IRdisplay,
-  mockery
+  mockery,
+  stringr
 Config/testthat/edition: 3
