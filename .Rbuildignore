@@ -6,3 +6,5 @@
 ^.lintr$
 ^.github$
 ^.vscode$
+^CHANGELOG\.md$
+^codecov\.yml$
