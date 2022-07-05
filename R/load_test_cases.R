@@ -22,8 +22,8 @@ load_test_cases <- function(test_file) {
 
   # add names to any test cases missing them
   test_suite <- env$test
-  if (is.na(test_suite$name)) {
-    test_suite$name <- basename(test_file)
+  if (is.null(test_suite$name)) {
+    test_suite$name <- tools::file_path_sans_ext(basename(test_file))
   }
 
   for (i in seq_along(test_suite$cases)) {

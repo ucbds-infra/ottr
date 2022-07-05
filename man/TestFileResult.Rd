@@ -22,10 +22,6 @@ A collection of test case results that correspond to a single test file.
 \item \href{#method-TestFileResult-get_basename}{\code{TestFileResult$get_basename()}}
 \item \href{#method-TestFileResult-get_score}{\code{TestFileResult$get_score()}}
 \item \href{#method-TestFileResult-repr}{\code{TestFileResult$repr()}}
-\item \href{#method-TestFileResult-failed_hidden_cases}{\code{TestFileResult$failed_hidden_cases()}}
-\item \href{#method-TestFileResult-failed_public_cases}{\code{TestFileResult$failed_public_cases()}}
-\item \href{#method-TestFileResult-get_points}{\code{TestFileResult$get_points()}}
-\item \href{#method-TestFileResult-failed_any_public}{\code{TestFileResult$failed_any_public()}}
 \item \href{#method-TestFileResult-to_list}{\code{TestFileResult$to_list()}}
 \item \href{#method-TestFileResult-clone}{\code{TestFileResult$clone()}}
 }
@@ -87,58 +83,6 @@ Convert this result into a human-readable string for display.
 
 \subsection{Returns}{
 The string representation of this result
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-TestFileResult-failed_hidden_cases"></a>}}
-\if{latex}{\out{\hypertarget{method-TestFileResult-failed_hidden_cases}{}}}
-\subsection{Method \code{failed_hidden_cases()}}{
-Get a vector of all failed hidden test case results.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$failed_hidden_cases()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-The failed hidden test case results
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-TestFileResult-failed_public_cases"></a>}}
-\if{latex}{\out{\hypertarget{method-TestFileResult-failed_public_cases}{}}}
-\subsection{Method \code{failed_public_cases()}}{
-Get a vector of all failed public test case results.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$failed_public_cases()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-The failed public test case results
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-TestFileResult-get_points"></a>}}
-\if{latex}{\out{\hypertarget{method-TestFileResult-get_points}{}}}
-\subsection{Method \code{get_points()}}{
-Get the total points possible for this test file.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$get_points()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-The points possible
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-TestFileResult-failed_any_public"></a>}}
-\if{latex}{\out{\hypertarget{method-TestFileResult-failed_any_public}{}}}
-\subsection{Method \code{failed_any_public()}}{
-Determine whether any public test cases were failed.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$failed_any_public()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-Whether an public test cases were failed
 }
 }
 \if{html}{\out{<hr>}}

@@ -68,52 +68,6 @@ TestFileResult <- R6::R6Class(
       return(paste0(output, collapse = "\n\n"))
     },
 
-    #' @description Get a vector of all failed hidden test case results.
-    #'
-    #' @return The failed hidden test case results
-    failed_hidden_cases = function() {
-      tcrs <- c()
-      for (tcr in self$test_case_results) {
-        if (tcr$test_case$hidden && !tcr$passed) {
-          tcrs <- c(tcrs, tcr)
-        }
-      }
-      return(tcrs)
-    },
-
-    #' @description Get a vector of all failed public test case results.
-    #'
-    #' @return The failed public test case results
-    failed_public_cases = function() {
-      tcrs <- c()
-      for (tcr in self$test_case_results) {
-        if (!tcr$test_case$hidden && !tcr$passed) {
-          tcrs <- c(tcrs, tcr)
-        }
-      }
-      return(tcrs)
-    },
-
-    #' @description Get the total points possible for this test file.
-    #'
-    #' @return The points possible
-    get_points = function() {
-      return(
-        sum(sapply(sapply(self$test_case_results, getElement, "test_case"), getElement, "points")))
-    },
-
-    #' @description Determine whether any public test cases were failed.
-    #'
-    #' @return Whether an public test cases were failed
-    failed_any_public = function() {
-      for (tcr in self$test_case_results) {
-        if (!tcr$test_case$hidden && !tcr$passed) {
-          return(TRUE)
-        }
-      }
-      return(FALSE)
-    },
-
     #' @description Convert this result to a JSON-compatible list with all of its fields.
     #'
     #' @return The list representation of this result
