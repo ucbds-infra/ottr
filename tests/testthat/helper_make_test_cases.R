@@ -1,4 +1,4 @@
-#' Generate a list of sample \code{\link{TestCase}} objects. The list returned should match
+#' Generate a list of sample [TestCase] objects. The list returned should match
 #' `test$cases` in `files/example_test_file.R` when `name_override` is not provided.
 #'
 #' @param name_override The name of the question; defaults to `"q1"`

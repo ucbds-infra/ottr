@@ -17,7 +17,7 @@ results (optional)}
 \item{ignore_errors}{Whether to ignore errors thrown while executing the script}
 }
 \value{
-The \code{\link{GradingResults}} object after executing tests referenced in the script
+The \link{GradingResults} object after executing tests referenced in the script
 and those specified by \code{tests_glob}
 }
 \description{

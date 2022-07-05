@@ -2,7 +2,7 @@
 #'
 #' @description A collection of test case results that correspond to a single test file.
 #'
-#' @field test_file_results The \code{ink{TestFileResult}} objects that make up this grading
+#' @field test_file_results The [TestFileResult] objects that make up this grading
 GradingResults <- R6::R6Class(
   "GradingResults",
   public = list(
@@ -10,7 +10,7 @@ GradingResults <- R6::R6Class(
 
     #' @description Create a grading result.
     #'
-    #' @param test_file_results The \code{ink{TestFileResult}} objects that make up this grading
+    #' @param test_file_results The [TestFileResult] objects that make up this grading
     #' result
     initialize = function(test_file_results) {
       self$test_file_results <- test_file_results

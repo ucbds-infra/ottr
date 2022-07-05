@@ -12,7 +12,7 @@ Authors@R: c(
 Maintainer: Christopher Pyles <cpyles@berkeley.edu>
 Description:
     An R autograding extension for Otter-Grader (<https://otter-grader.readthedocs.io>). It supports 
-    grading R scripts, RMarkdown documents, and R Jupyter Notebooks.
+    grading R scripts, R Markdown documents, and R Jupyter Notebooks.
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -28,5 +28,6 @@ Imports:
 Suggests:
   IRdisplay,
   mockery,
-  stringr
+  stringr,
+  withr
 Config/testthat/edition: 3

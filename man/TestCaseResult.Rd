@@ -15,7 +15,7 @@ itself.
 
 \item{\code{error}}{An error raised by executing the test, if any}
 
-\item{\code{test_case}}{The \code{\link{TestCase}} that this result tracks}
+\item{\code{test_case}}{The \link{TestCase} that this result tracks}
 }
 \if{html}{\out{</div>}}
 }

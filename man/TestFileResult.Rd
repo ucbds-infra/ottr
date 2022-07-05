@@ -9,7 +9,7 @@ A collection of test case results that correspond to a single test file.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{test_case_results}}{The \code{ink{TestCaseResult}} objects that make up this test file}
+\item{\code{test_case_results}}{The \link{TestCaseResult} objects that make up this test file}
 
 \item{\code{filename}}{The name of the test file}
 }
@@ -40,7 +40,7 @@ Create a test file result.
 \describe{
 \item{\code{filename}}{The name of the test file}
 
-\item{\code{test_case_results}}{The \code{ink{TestCaseResult}} objects that make up this test file}
+\item{\code{test_case_results}}{The \link{TestCaseResult} objects that make up this test file}
 }
 \if{html}{\out{</div>}}
 }
@@ -63,7 +63,8 @@ The basename of the test file
 \if{latex}{\out{\hypertarget{method-TestFileResult-get_score}{}}}
 \subsection{Method \code{get_score()}}{
 Get the total score earned for this test file as a percentage. Uses
-\code{\link{TestCaseResult$get_score}} to determine the points earned for each test case.
+\code{\link[=TestCaseResult]{TestCaseResult$get_score()}} to determine the points earned for each test
+case.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TestFileResult$get_score()}\if{html}{\out{</div>}}
 }

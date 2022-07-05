@@ -1,7 +1,7 @@
 #' Run the test cases in a test file
 #'
-#' @description Execute checks in a test suite and return the \code{\link{TestFileResult}} object
-#' from executing the test. Optionally prints results of the test to console.
+#' @description Execute checks in a test suite and return the [TestFileResult] object from executing
+#' the test. Optionally prints results of the test to console.
 #'
 #' @param test_file Path to a test file
 #' @param test_env An environment against which to run tests

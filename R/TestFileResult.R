@@ -2,7 +2,7 @@
 #'
 #' @description A collection of test case results that correspond to a single test file.
 #'
-#' @field test_case_results The \code{ink{TestCaseResult}} objects that make up this test file
+#' @field test_case_results The [TestCaseResult] objects that make up this test file
 #' @field filename The name of the test file
 TestFileResult <- R6::R6Class(
   "TestFileResult",
@@ -13,7 +13,7 @@ TestFileResult <- R6::R6Class(
     #' @description Create a test file result.
     #'
     #' @param filename The name of the test file
-    #' @param test_case_results The \code{ink{TestCaseResult}} objects that make up this test file
+    #' @param test_case_results The [TestCaseResult] objects that make up this test file
     initialize = function(filename, test_case_results) {
       self$filename <- filename
       self$test_case_results <- test_case_results
@@ -25,7 +25,8 @@ TestFileResult <- R6::R6Class(
     get_basename = function() basename(self$filename),
 
     #' @description Get the total score earned for this test file as a percentage. Uses
-    #' \code{\link{TestCaseResult$get_score}} to determine the points earned for each test case.
+    #' [`TestCaseResult$get_score()`][TestCaseResult] to determine the points earned for each test
+    #' case.
     #'
     #' @return The score as a percentage.
     get_score = function() {

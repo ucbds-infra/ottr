@@ -17,8 +17,8 @@ check(test_file, test_env, show_results)
 The parsed test results for the suite
 }
 \description{
-Execute checks in a test suite and return the \code{\link{TestFileResult}} object
-from executing the test. Optionally prints results of the test to console.
+Execute checks in a test suite and return the \link{TestFileResult} object from executing
+the test. Optionally prints results of the test to console.
 }
 \examples{
 \dontrun{

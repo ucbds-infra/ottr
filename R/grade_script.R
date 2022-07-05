@@ -9,7 +9,7 @@
 #' results (optional)
 #' @param ignore_errors Whether to ignore errors thrown while executing the script
 #'
-#' @return The \code{\link{GradingResults}} object after executing tests referenced in the script
+#' @return The [GradingResults] object after executing tests referenced in the script
 #' and those specified by `tests_glob`
 grade_script <- function(script_path, tests_glob, secret, ignore_errors) {
   # convert script to a string

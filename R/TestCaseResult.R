@@ -6,7 +6,7 @@
 #'
 #' @field passed Whether the test passed
 #' @field error An error raised by executing the test, if any
-#' @field test_case The \code{\link{TestCase}} that this result tracks
+#' @field test_case The [TestCase] that this result tracks
 TestCaseResult <- R6::R6Class(
   "TestCaseResult",
   public = list(

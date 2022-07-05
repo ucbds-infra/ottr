@@ -9,7 +9,7 @@ A collection of test case results that correspond to a single test file.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{test_file_results}}{The \code{ink{TestFileResult}} objects that make up this grading}
+\item{\code{test_file_results}}{The \link{TestFileResult} objects that make up this grading}
 }
 \if{html}{\out{</div>}}
 }
@@ -34,7 +34,7 @@ Create a grading result.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{test_file_results}}{The \code{ink{TestFileResult}} objects that make up this grading
+\item{\code{test_file_results}}{The \link{TestFileResult} objects that make up this grading
 result}
 }
 \if{html}{\out{</div>}}

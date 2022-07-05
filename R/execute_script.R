@@ -5,7 +5,7 @@
 #' Converts a string to an AST and executes that script in a dummy environment for running test
 #' cases against. Transforms all expressions of the form `. = ottr::check(...)` by replacing the `.`
 #' with an index into a list in the environment with name `check_results_{SECRET}` to collect the
-#' \code{\link{TestFileResult}} objects generated from those checks. (This helps to handle variable
+#' [TestFileResult] objects generated from those checks. (This helps to handle variable
 #' name collisions in tests when grading a script.)
 #'
 #' @param script The string to be executed
