@@ -1,0 +1,12 @@
+name: ottr
+channels: 
+    - conda-forge
+    - defaults
+dependencies:
+    - python
+    - r-base
+    - r-essentials
+    - r-devtools
+    - pip
+    - pip:
+        - radian

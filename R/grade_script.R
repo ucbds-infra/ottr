@@ -11,24 +11,24 @@
 #'
 #' @return The [GradingResults] object after executing tests referenced in the script
 #' and those specified by `tests_glob`
-grade_script <- function(script_path, tests_glob, secret, ignore_errors) {
+grade_script <- function(script_path, tests_glob, ignore_errors) {
   # convert script to a string
   script <- paste(readLines(script_path), collapse = "\n")
-
-  # create a secret with make_secret if unspecified
-  if (missing(secret)) {
-    secret <- make_secret()
-  }
 
   if (missing(ignore_errors)) {
     ignore_errors <- TRUE
   }
 
+  # initialize the collector and store it
+  initialize_collector()
+  check_collector <- get_collector()
+
   # run the script and extract results from env, capturing stdout
   testthat::capture_output({
-    test_env <- execute_script(script, secret, ignore_errors)
-    test_file_results <- test_env[[paste0("check_results_", secret)]]
-  })
+    test_env <- execute_script(script, ignore_errors)
+  }, print = TRUE)
+
+  test_file_results <- check_collector$get_results()
 
   # run the tests in tests_glob on the env, collect in test_file_results
   num_embedded_tests <- length(test_file_results)

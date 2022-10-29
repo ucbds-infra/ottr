@@ -4,17 +4,17 @@
 \alias{grade_script}
 \title{Grade an R script against a series of test files}
 \usage{
-grade_script(script_path, tests_glob, secret, ignore_errors)
+grade_script(script_path, tests_glob, ignore_errors)
 }
 \arguments{
 \item{script_path}{The path to the script}
 
 \item{tests_glob}{The pattern to search for extra tests}
 
+\item{ignore_errors}{Whether to ignore errors thrown while executing the script}
+
 \item{secret}{The string to be appended to the name \code{check_results_} as the list name to collect
 results (optional)}
-
-\item{ignore_errors}{Whether to ignore errors thrown while executing the script}
 }
 \value{
 The \link{GradingResults} object after executing tests referenced in the script

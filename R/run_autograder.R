@@ -16,11 +16,7 @@
 #' \dontrun{
 #' run_autograder("hw01.R", "ABC123", TRUE, "tests")
 #' }
-run_autograder <- function(script_path, secret, ignore_errors, test_dir) {
-  if (missing(secret)) {
-    secret <- make_secret()
-  }
-
+run_autograder <- function(script_path, ignore_errors, test_dir) {
   if (missing(ignore_errors)) {
     ignore_errors <- TRUE
   }
@@ -29,6 +25,6 @@ run_autograder <- function(script_path, secret, ignore_errors, test_dir) {
     test_dir <- "/autograder/source/tests"
   }
 
-  grading_results <- grade_script(script_path, paste0(test_dir, "/*.[Rr]"), secret, ignore_errors)
+  grading_results <- grade_script(script_path, paste0(test_dir, "/*.[Rr]"), ignore_errors)
   return(grading_results$to_json())
 }
