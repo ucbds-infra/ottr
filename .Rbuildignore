@@ -8,3 +8,5 @@
 ^.vscode$
 ^CHANGELOG\.md$
 ^codecov\.yml$
+^\.github$
+^environment\.yml$

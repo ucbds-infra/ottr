@@ -5,13 +5,11 @@ test_that("grades a script and returns a list of TestFileResult objects", {
 
   test_file_result <- make_test_file_results()[[1]]
 
-  mock_check <- mock(test_file_result)
+  mock_check <- mock(test_file_result, cycle = TRUE)
   stub(grade_script, "check", mock_check)
 
-  secret <- "WLayjJ"
   env <- new.env()
-  env[[paste0("check_results_", secret)]] <- list(test_file_result)
-  mock_execute_script <- mock(env)
+  mock_execute_script <- mock(env, cycle = TRUE)
   stub(grade_script, "execute_script", mock_execute_script)
 
   tests_dir <- "my_tests"
@@ -32,8 +30,9 @@ test_that("grades a script and returns a list of TestFileResult objects", {
   expect_equal(results, GradingResults$new(c(test_file_result, test_file_result)))
 
   expect_equal(length(mock_execute_script), 1)
-  expect_args(mock_execute_script, 1, script, secret, TRUE)
+  expect_args(mock_execute_script, 1, script, TRUE)
 
-  expect_equal(length(mock_check), 1)
-  expect_args(mock_check, 1, file.path(tests_dir, "q2.R"), env, FALSE)
+  expect_equal(length(mock_check), 2)
+  expect_args(mock_check, 1, file.path(tests_dir, "q1.R"), env, FALSE)
+  expect_args(mock_check, 2, file.path(tests_dir, "q2.R"), env, FALSE)
 })

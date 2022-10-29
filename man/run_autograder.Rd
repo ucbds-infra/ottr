@@ -4,13 +4,10 @@
 \alias{run_autograder}
 \title{Grade an R script against test files in a directory}
 \usage{
-run_autograder(script_path, secret, ignore_errors, test_dir)
+run_autograder(script_path, ignore_errors, test_dir)
 }
 \arguments{
 \item{script_path}{The path to the script}
-
-\item{secret}{The string to be appended to the name \code{check_results_} as the list name to collect
-results (optional)}
 
 \item{ignore_errors}{Whether to ignore errors thrown while executing the script}
 

@@ -4,13 +4,10 @@
 \alias{execute_script}
 \title{Generate an environment from an R script}
 \usage{
-execute_script(script, secret, ignore_errors)
+execute_script(script, ignore_errors)
 }
 \arguments{
 \item{script}{The string to be executed}
-
-\item{secret}{The string to be appended to the name \code{check_results_} as the list name to collect
-results}
 
 \item{ignore_errors}{Whether to ignore errors thrown while executing the script}
 }
