@@ -8,14 +8,21 @@ CheckCollector <- R6::R6Class(
   public = list(
     test_file_results = NA,
 
+    #' @description Create a [CheckCollector].
     initialize = function() {
       self$test_file_results <- list()
     },
 
+    #' Add a [TestFileResult] to this collector.
+    #' 
+    #' @param test_file_result The [TestFileResult] to add
     add_result = function(test_file_result) {
       self$test_file_results <- append(self$test_file_results, test_file_result)
     },
 
+    #' Retrieve the list [TestFileResult] objects stored in this collector.
+    #' 
+    #' @return The list of [TestFileResult] objects
     get_results = function() {
       return(self$test_file_results)
     }

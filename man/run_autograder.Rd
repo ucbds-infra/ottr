@@ -12,9 +12,6 @@ run_autograder(script_path, ignore_errors, test_dir)
 \item{ignore_errors}{Whether to ignore errors thrown while executing the script}
 
 \item{test_dir}{A directory of tests to glob from}
-
-\item{secret}{The string to be appended to the name \code{check_results_} as the list name to collect
-results (optional)}
 }
 \value{
 The JSON string

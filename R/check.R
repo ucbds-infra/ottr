@@ -58,8 +58,6 @@ check <- function(test_file, test_env, show_results) {
     cat(file_result$repr())
   }
 
-  # options(testthat.use_colours = use_colours)
-
   # return the test suite results
   return(file_result)
 }

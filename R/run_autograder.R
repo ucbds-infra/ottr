@@ -4,8 +4,6 @@
 #' properly-formatted JSON string.
 #'
 #' @param script_path The path to the script
-#' @param secret The string to be appended to the name `check_results_` as the list name to collect
-#' results (optional)
 #' @param ignore_errors Whether to ignore errors thrown while executing the script
 #' @param test_dir A directory of tests to glob from
 #'

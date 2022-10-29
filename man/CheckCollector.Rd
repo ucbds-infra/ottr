@@ -26,6 +26,8 @@ A collection of test file results created while grading an assignment
 \if{html}{\out{<a id="method-CheckCollector-new"></a>}}
 \if{latex}{\out{\hypertarget{method-CheckCollector-new}{}}}
 \subsection{Method \code{new()}}{
+Create a \link{CheckCollector}.
+Add a \link{TestFileResult} to this collector.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{CheckCollector$new()}\if{html}{\out{</div>}}
 }
@@ -39,6 +41,14 @@ A collection of test file results created while grading an assignment
 \if{html}{\out{<div class="r">}}\preformatted{CheckCollector$add_result(test_file_result)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{test_file_result}}{The \link{TestFileResult} to add
+Retrieve the list \link{TestFileResult} objects stored in this collector.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CheckCollector-get_results"></a>}}
@@ -48,6 +58,9 @@ A collection of test file results created while grading an assignment
 \if{html}{\out{<div class="r">}}\preformatted{CheckCollector$get_results()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+The list of \link{TestFileResult} objects
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CheckCollector-clone"></a>}}

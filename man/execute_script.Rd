@@ -10,9 +10,6 @@ execute_script(script, ignore_errors)
 \item{script}{The string to be executed}
 
 \item{ignore_errors}{Whether to ignore errors thrown while executing the script}
-
-\item{secret}{The string to be appended to the name \code{check_results_} as the list name to collect
-results}
 }
 \value{
 The global environment after executing the script

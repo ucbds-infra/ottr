@@ -5,8 +5,6 @@
 #'
 #' @param script_path The path to the script
 #' @param tests_glob The pattern to search for extra tests
-#' @param secret The string to be appended to the name `check_results_` as the list name to collect
-#' results (optional)
 #' @param ignore_errors Whether to ignore errors thrown while executing the script
 #'
 #' @return The [GradingResults] object after executing tests referenced in the script

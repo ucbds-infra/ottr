@@ -9,8 +9,6 @@
 #' name collisions in tests when grading a script.)
 #'
 #' @param script The string to be executed
-#' @param secret The string to be appended to the name `check_results_` as the list name to collect
-#' results
 #' @param ignore_errors Whether to ignore errors thrown while executing the script
 #'
 #' @return The global environment after executing the script

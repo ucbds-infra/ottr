@@ -12,9 +12,6 @@ grade_script(script_path, tests_glob, ignore_errors)
 \item{tests_glob}{The pattern to search for extra tests}
 
 \item{ignore_errors}{Whether to ignore errors thrown while executing the script}
-
-\item{secret}{The string to be appended to the name \code{check_results_} as the list name to collect
-results (optional)}
 }
 \value{
 The \link{GradingResults} object after executing tests referenced in the script
