@@ -10,6 +10,7 @@ jobs:
       - name: Close Issue
         uses: peter-evans/close-issue@v2
         with:
+          close-reason: not_planned
           comment: |
             This repo is not monitored for issues, bugs, or feature requests. Please open an issue on the main
             [Otter-Grader repo](https://github.com/ucbds-infra/otter-grader) instead.
