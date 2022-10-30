@@ -1,0 +1,15 @@
+# A workflow for automatically closing all issues
+name: Close issues
+on:
+  issues:
+    types: [ opened ]
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close Issue
+        uses: peter-evans/close-issue@v2
+        with:
+          comment: |
+            This repo is not monitored for issues, bugs, or feature requests. Please open an issue on the main
+            [Otter-Grader repo](https://github.com/ucbds-infra/otter-grader) instead.
