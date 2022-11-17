@@ -4,20 +4,27 @@
 \alias{export}
 \title{Export a JupyterNotebook to a zip file}
 \usage{
-export(notebook_path, export_path = NULL, display_link = TRUE)
+export(submission_path, export_path = NULL, display_link = TRUE, pdf = FALSE)
 }
 \arguments{
-\item{notebook_path}{The path to the notebook}
+\item{submission_path}{The path to the notebook}
 
 \item{export_path}{The path at which to write the zip file (optional)}
 
 \item{display_link}{Whether to display a download link with \code{IRdisplay}}
+
+\item{pdf}{Whether to include a PDF of the submission (only works for Rmd and ipynb files)}
 }
 \description{
-Export a Jupyter Notebook to a zip file for submission.
+Export a Jupyter Notebook to a zip file for submission. If indicated, a PDF of the
+submission is generated and included in the zip file. (PDF generation is only supported for Rmd
+and ipynb files.)
 }
 \examples{
 \dontrun{
 export("hw01.ipynb")
+
+# with pdf
+export("hw01.ipynb", pdf = TRUE)
 }
 }

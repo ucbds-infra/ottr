@@ -20,14 +20,16 @@ RoxygenNote: 7.2.1
 Depends:
     R (>= 4.0.0)
 Imports:
-  testthat,
   jsonlite,
+  testthat,
+  tools,
   R6,
   zip,
   methods
 Suggests:
   IRdisplay,
   mockery,
+  rmarkdown,
   stringr,
   withr
 Config/testthat/edition: 3
