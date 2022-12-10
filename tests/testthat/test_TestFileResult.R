@@ -17,6 +17,12 @@ test_that("$new() initializes fields correctly", {
 
   expect_equal(tfr$filename, filename)
   expect_equal(tfr$test_case_results, tcrs)
+
+  tfr <- TestFileResult$new(filename, tcrs, 2)
+
+  expect_equal(tfr$filename, filename)
+  expect_equal(tfr$test_case_results, tcrs)
+  expect_equal(tfr$points, 2)
 })
 
 test_that("$get_basename() returns the basename of the test file", {
@@ -79,4 +85,22 @@ test_that("$to_list() returns the test file results as a list", {
   expect_equal(length(tfr_list), 2)
   expect_equal(tfr_list$filename, filename)
   expect_equal(tfr_list$test_case_results, lapply(tcrs, function(tcr) tcr$to_list()))
+
+  tfr <- TestFileResult$new(filename, tcrs, 2)
+  tfr_list <- tfr$to_list()
+
+  expect_true(is.list(tfr_list))
+  expect_equal(length(tfr_list), 3)
+  expect_equal(tfr_list$filename, filename)
+  expect_equal(tfr_list$test_case_results, lapply(tcrs, function(tcr) tcr$to_list()))
+  expect_equal(tfr_list$points, 2)
+
+  tfr <- TestFileResult$new(filename, tcrs, c(1, 1, 1))
+  tfr_list <- tfr$to_list()
+
+  expect_true(is.list(tfr_list))
+  expect_equal(length(tfr_list), 3)
+  expect_equal(tfr_list$filename, filename)
+  expect_equal(tfr_list$test_case_results, lapply(tcrs, function(tcr) tcr$to_list()))
+  expect_equal(tfr_list$points, c(1, 1, 1))
 })

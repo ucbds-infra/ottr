@@ -2,12 +2,12 @@
 % Please edit documentation in R/export.R
 \name{export}
 \alias{export}
-\title{Export a JupyterNotebook to a zip file}
+\title{Export a submission to a zip file}
 \usage{
 export(submission_path, export_path = NULL, display_link = TRUE, pdf = FALSE)
 }
 \arguments{
-\item{submission_path}{The path to the notebook}
+\item{submission_path}{The path to the submission}
 
 \item{export_path}{The path at which to write the zip file (optional)}
 
@@ -16,7 +16,7 @@ export(submission_path, export_path = NULL, display_link = TRUE, pdf = FALSE)
 \item{pdf}{Whether to include a PDF of the submission (only works for Rmd and ipynb files)}
 }
 \description{
-Export a Jupyter Notebook to a zip file for submission. If indicated, a PDF of the
+Export a submission to a zip file for submitting. If indicated, a PDF of the
 submission is generated and included in the zip file. (PDF generation is only supported for Rmd
 and ipynb files.)
 }

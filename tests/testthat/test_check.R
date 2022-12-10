@@ -33,3 +33,24 @@ test_that("runs a test against the student's environment and returns a TestFileR
   # check that it errors if no test file is provided
   expect_error(check(), regexp = "must have a test file")
 })
+
+
+test_that("correctly includes the test file point value in the TestFileR", {
+  test_env <- new.env()
+  mock_parent.frame <- mock(test_env, cycle = TRUE)
+  stub(check, "parent.frame", mock_parent.frame)
+
+  mock_cat <- mock()
+  stub(check, "cat", mock_cat)
+
+  mock_load_test_cases <- mock(list(
+    cases = list(ottr::TestCase$new(name = "q1")),
+    points = 1
+  ), cycle = TRUE)
+  stub(check, "load_test_cases", mock_load_test_cases)
+  test_file_path <- "tests/q1.r"
+
+  results <- check(test_file_path)
+
+  expect_equal(results$points, 1)
+})

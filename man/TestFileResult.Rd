@@ -12,6 +12,8 @@ A collection of test case results that correspond to a single test file.
 \item{\code{test_case_results}}{The \link{TestCaseResult} objects that make up this test file}
 
 \item{\code{filename}}{The name of the test file}
+
+\item{\code{points}}{The point value of the test file or a list of test case point values}
 }
 \if{html}{\out{</div>}}
 }
@@ -32,7 +34,7 @@ A collection of test case results that correspond to a single test file.
 \subsection{Method \code{new()}}{
 Create a test file result.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$new(filename, test_case_results)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$new(filename, test_case_results, points = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -41,6 +43,8 @@ Create a test file result.
 \item{\code{filename}}{The name of the test file}
 
 \item{\code{test_case_results}}{The \link{TestCaseResult} objects that make up this test file}
+
+\item{\code{points}}{The point value of the test file or a list of test case point values}
 }
 \if{html}{\out{</div>}}
 }
