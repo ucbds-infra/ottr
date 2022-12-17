@@ -58,12 +58,3 @@ valid_syntax <- function(script) {
   )
   return(!error)
 }
-
-#' Check whether a value is nullish (i.e. NULL or NA)
-#'
-#' @param x The value to cehck
-#'
-#' @return Whether the value is nullish
-nullish <- function(x) {
-  return(is.null(x) || is.na(x))
-}

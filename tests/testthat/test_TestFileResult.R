@@ -82,8 +82,9 @@ test_that("$to_list() returns the test file results as a list", {
   tfr_list <- tfr$to_list()
 
   expect_true(is.list(tfr_list))
-  expect_equal(length(tfr_list), 2)
+  expect_equal(length(tfr_list), 3)
   expect_equal(tfr_list$filename, filename)
+  expect_equal(tfr_list$points, NULL)
   expect_equal(tfr_list$test_case_results, lapply(tcrs, function(tcr) tcr$to_list()))
 
   tfr <- TestFileResult$new(filename, tcrs, 2)

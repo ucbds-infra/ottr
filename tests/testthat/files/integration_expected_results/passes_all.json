@@ -2,6 +2,7 @@
   "test_file_results": [
     {
       "filename": "files/integration_test_cases/q1.R",
+      "points": null,
       "test_case_results": [
         {
           "passed": true,
@@ -31,6 +32,7 @@
     },
     {
       "filename": "files/integration_test_cases/q2.R",
+      "points": null,
       "test_case_results": [
         {
           "passed": true,
@@ -60,6 +62,7 @@
     },
     {
       "filename": "files/integration_test_cases/q3.R",
+      "points": null,
       "test_case_results": [
         {
           "passed": true,

@@ -84,12 +84,9 @@ TestFileResult <- R6::R6Class(
 
       ret <- list(
         filename = self$filename,
+        points = self$points,
         test_case_results = tcr_lists
       )
-
-      if (!nullish(self$points)) {
-        ret$points <- self$points
-      }
 
       return(ret)
     }
