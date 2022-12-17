@@ -32,12 +32,14 @@ check <- function(test_file, test_env, show_results) {
 
   eval("options(testthat.use_colours = FALSE)", test_env)
 
+  test_suite <- list()
   test_case_results <- c()
 
   # redirect stdout so that testthat doesn't print
   testthat::capture_output({
     # read the test cases from the test file
-    test_cases <- load_test_cases(test_file)$cases
+    test_suite <- load_test_cases(test_file)
+    test_cases <- test_suite$cases
 
     # run the tests
     for (tc in test_cases) {
@@ -46,7 +48,7 @@ check <- function(test_file, test_env, show_results) {
     }
   })
 
-  file_result <- TestFileResult$new(test_file, test_case_results)
+  file_result <- TestFileResult$new(test_file, test_case_results, test_suite$points)
 
   # collect the result if needed
   if (!is.null(get_collector())) {

@@ -46,7 +46,7 @@ GradingResults <- R6::R6Class(
     #'
     #' @return The JSON string
     to_json = function() {
-      return(jsonlite::toJSON(self$to_list(), auto_unbox = TRUE, pretty = TRUE))
+      return(jsonlite::toJSON(self$to_list(), auto_unbox = TRUE, pretty = TRUE, null = "null"))
     }
   )
 )

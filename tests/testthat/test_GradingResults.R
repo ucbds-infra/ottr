@@ -21,6 +21,6 @@ test_that("$to_json() returns the grading results as JSON", {
 
   expect_equal(
     gr$to_json(),
-    jsonlite::toJSON(make_test_file_results_list(), auto_unbox = TRUE, pretty = TRUE)
+    jsonlite::toJSON(make_test_file_results_list(), auto_unbox = TRUE, pretty = TRUE, null = "null")
   )
 })

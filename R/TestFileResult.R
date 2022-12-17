@@ -4,19 +4,23 @@
 #'
 #' @field test_case_results The [TestCaseResult] objects that make up this test file
 #' @field filename The name of the test file
+#' @field points The point value of the test file or a list of test case point values
 TestFileResult <- R6::R6Class(
   "TestFileResult",
   public = list(
     test_case_results = NA,
     filename = NA,
+    points = NA,
 
     #' @description Create a test file result.
     #'
     #' @param filename The name of the test file
     #' @param test_case_results The [TestCaseResult] objects that make up this test file
-    initialize = function(filename, test_case_results) {
+    #' @param points The point value of the test file or a list of test case point values
+    initialize = function(filename, test_case_results, points = NULL) {
       self$filename <- filename
       self$test_case_results <- test_case_results
+      self$points <- points
     },
 
     #' @description Get the basename of the file this result corresponds to.
@@ -78,10 +82,16 @@ TestFileResult <- R6::R6Class(
         tcr_lists[[i]] = self$test_case_results[[i]]$to_list()
       }
 
-      return(list(
+      ret <- list(
         filename = self$filename,
         test_case_results = tcr_lists
-      ))
+      )
+
+      if (!nullish(self$points)) {
+        ret$points <- self$points
+      }
+
+      return(ret)
     }
   )
 )
