@@ -1,5 +1,13 @@
 # Changelog
 
+**v1.3.1:**
+
+* Fixed bug in generating PDFs of RMarkdown files in `ottr::export`
+
+**v1.3.0:**
+
+* Added support for exporting PDFs in zip files created by `ottr:export`
+
 **v1.2.0:**
 
 * Refactored structure of the package

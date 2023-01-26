@@ -9,6 +9,8 @@
 #' @field success_message A message to show to students if the test passes
 #' @field failure_message A message to show to students if the test fails
 #'
+#' @importFrom R6 R6Class
+#'
 #' @export
 #'
 #' @examples
