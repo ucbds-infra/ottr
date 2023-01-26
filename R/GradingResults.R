@@ -44,6 +44,8 @@ GradingResults <- R6::R6Class(
 
     #' @description Export these results to a JSON string.
     #'
+    #' @importFrom jsonlite toJSON
+    #'
     #' @return The JSON string
     to_json = function() {
       return(jsonlite::toJSON(self$to_list(), auto_unbox = TRUE, pretty = TRUE, null = "null"))
