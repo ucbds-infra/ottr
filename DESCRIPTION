@@ -31,5 +31,6 @@ Suggests:
   mockery,
   rmarkdown,
   stringr,
-  withr
+  withr,
+  IRkernel
 Config/testthat/edition: 3

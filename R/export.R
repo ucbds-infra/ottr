@@ -8,6 +8,7 @@
 #' @param export_path The path at which to write the zip file (optional)
 #' @param display_link Whether to display a download link with `IRdisplay`
 #' @param pdf Whether to include a PDF of the submission (only works for Rmd and ipynb files)
+#' @param force_save Whether to attempt to force-save the notebook if running on Jupyter
 #'
 #' @export
 #'
@@ -18,7 +19,13 @@
 #' # with pdf
 #' export("hw01.ipynb", pdf = TRUE)
 #' }
-export <- function(submission_path, export_path = NULL, display_link = TRUE, pdf = FALSE) {
+export <- function(
+  submission_path,
+  export_path = NULL,
+  display_link = TRUE,
+  pdf = FALSE,
+  force_save = FALSE
+) {
   timestamp <- format(Sys.time(), "%Y_%m_%dT%H_%M_%S")
 
   if (is.null(export_path)) {
@@ -26,9 +33,24 @@ export <- function(submission_path, export_path = NULL, display_link = TRUE, pdf
     export_path <- paste0(subm_name, "_", timestamp, ".zip")
   }
 
+ext <- tools::file_ext(submission_path)
+  if (force_save) {
+    if (ext != "ipynb") {
+      stop("Force save can only be used on ipynb files")
+    }
+
+    success <- save_notebook(submission_path)
+    if (!success) {
+      warning(paste0(
+        "Couldn't automatically save the notebook; we recommend using File > Save & ",
+        "Checkpoint and then re-running this cell. The zip file returned by this call ",
+        "will use the last saved version of this notebook."
+      ))
+    }
+  }
+
   pdf_path <- NULL
   if (pdf) {
-    ext <- tools::file_ext(submission_path)
     pdf_path <- paste0(tools::file_path_sans_ext(basename(submission_path)), ".pdf")
     if (ext == "ipynb") {
       system2("jupyter", c("nbconvert", "--to=pdf", paste0("--output=", pdf_path), submission_path))
@@ -63,7 +85,7 @@ export <- function(submission_path, export_path = NULL, display_link = TRUE, pdf
 
   file.remove(zip_filename_file_name)
 
-  if (display_link && Sys.getenv("RSTUDIO") != "1") {
+  if (display_link && running_on_jupyter()) {
     IRdisplay::display_html(sprintf("
     <p>Your submission has been exported. Click <a href='%s' download='%s'
     target='_blank'>here</a> to download the zip file.</p>

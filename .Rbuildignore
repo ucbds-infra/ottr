@@ -10,3 +10,4 @@
 ^codecov\.yml$
 ^\.github$
 ^environment\.yml$
+\.ipynb_checkpoints

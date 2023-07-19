@@ -4,7 +4,13 @@
 \alias{export}
 \title{Export a submission to a zip file}
 \usage{
-export(submission_path, export_path = NULL, display_link = TRUE, pdf = FALSE)
+export(
+  submission_path,
+  export_path = NULL,
+  display_link = TRUE,
+  pdf = FALSE,
+  force_save = FALSE
+)
 }
 \arguments{
 \item{submission_path}{The path to the submission}
@@ -14,6 +20,8 @@ export(submission_path, export_path = NULL, display_link = TRUE, pdf = FALSE)
 \item{display_link}{Whether to display a download link with \code{IRdisplay}}
 
 \item{pdf}{Whether to include a PDF of the submission (only works for Rmd and ipynb files)}
+
+\item{force_save}{Whether to attempt to force-save the notebook if running on Jupyter}
 }
 \description{
 Export a submission to a zip file for submitting. If indicated, a PDF of the
