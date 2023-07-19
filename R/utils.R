@@ -44,5 +44,5 @@ valid_syntax <- function(script) {
 #' running_on_jupyter()
 #' }
 running_on_jupyter <- function() {
-  return(!is.null(IRKernel::comm_manager()))
+  return(!is.null(IRkernel::comm_manager()))
 }

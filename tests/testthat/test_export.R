@@ -3,6 +3,8 @@ library(mockery)
 get_pdf_path <- function(p) paste0(tools::file_path_sans_ext(basename(p)), ".pdf")
 
 test_that("writes a zip file with the correct contents", {
+  stub(export, "running_on_jupyter", TRUE)
+
   mock_display_html <- mock()
   stub(export, "IRdisplay::display_html", mock_display_html)
 
@@ -101,4 +103,40 @@ test_that("supports PDF exports for Rmd files", {
   # check that IRdisplay::display_html was called
   expect_called(mock_render, 1)
   expect_args(mock_render, 1, tempfile_path, "pdf_document", pdf_path, dirname(subm_path))
+})
+
+test_that("supports force-saving notebook files", {
+  stub(export, "IRdisplay::display_html", mock())
+
+  mock_save_notebook <- mock(TRUE)
+  stub(export, "save_notebook", mock_save_notebook)
+
+  subm_path <- "my_notebook.ipynb"
+  writeLines(c("This is a notebook!"), subm_path, sep = "")
+  withr::defer(file.remove(subm_path))
+
+  export(subm_path, force_save = TRUE)
+
+  expect_equal(length(Sys.glob("*.zip")), 1)
+  zip_path <- Sys.glob("*.zip")[1]
+  withr::defer(file.remove(zip_path))
+
+  expect_called(mock_save_notebook, 1)
+  expect_args(mock_save_notebook, 1, subm_path)
+})
+
+test_that("warns the user when force-save fails", {
+  stub(export, "IRdisplay::display_html", mock())
+
+  stub(export, "save_notebook", FALSE)
+
+  subm_path <- "my_notebook.ipynb"
+  writeLines(c("This is a notebook!"), subm_path, sep = "")
+  withr::defer(file.remove(subm_path))
+
+  expect_warning(export(subm_path, force_save = TRUE))
+
+  expect_equal(length(Sys.glob("*.zip")), 1)
+  zip_path <- Sys.glob("*.zip")[1]
+  withr::defer(file.remove(zip_path))
 })
