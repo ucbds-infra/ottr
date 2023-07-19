@@ -58,3 +58,18 @@ valid_syntax <- function(script) {
   )
   return(!error)
 }
+
+#' Determine whether this R session is running on Jupyter.
+#'
+#' @description Determine whether this R session is running on Jupyter by checking for a CommManager
+#' in IRkernel.
+#'
+#' @return A boolean indicating whether IRkernel is running.
+#'
+#' @examples
+#' \dontrun{
+#' running_on_jupyter()
+#' }
+running_on_jupyter <- function() {
+  return(!is.null(IRKernel::comm_manager()))
+}

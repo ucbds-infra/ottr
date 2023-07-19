@@ -63,7 +63,7 @@ export <- function(submission_path, export_path = NULL, display_link = TRUE, pdf
 
   file.remove(zip_filename_file_name)
 
-  if (display_link && Sys.getenv("RSTUDIO") != "1") {
+  if (display_link && running_on_jupyter()) {
     IRdisplay::display_html(sprintf("
     <p>Your submission has been exported. Click <a href='%s' download='%s'
     target='_blank'>here</a> to download the zip file.</p>
