@@ -1,6 +1,6 @@
 # Changelog
 
-**Unreleased:**
+**v1.4.0:**
 
 * Added ability to save notebooks with `ottr::export` per [`ucbds-infra/otter-grader`#474](https://github.com/ucbds-infra/otter-grader/issues/474)
 
