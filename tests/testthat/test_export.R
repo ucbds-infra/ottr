@@ -140,3 +140,8 @@ test_that("warns the user when force-save fails", {
   zip_path <- Sys.glob("*.zip")[1]
   withr::defer(file.remove(zip_path))
 })
+
+test_that("doesn't allow force-saving non-notebook files", {
+  expect_error(export("foo.Rmd", force_save = TRUE))
+  expect_error(export("foo.R", force_save = TRUE))
+})
