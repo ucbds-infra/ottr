@@ -40,7 +40,7 @@ test_that("supports PDF exports for ipynb files", {
   mock_system2 <- mock()
   stub(export, "system2", mock_system2)
 
-  stub(export, "file.rename", mock())
+  stub(export, "file.rename", c(TRUE))
 
   subm_path <- "my_notebook.ipynb"
   writeLines(c("This is a notebook!"), subm_path, sep = "")
@@ -66,7 +66,38 @@ test_that("supports PDF exports for ipynb files", {
 
   # check that IRdisplay::display_html was called
   expect_called(mock_system2, 1)
-  expect_args(mock_system2, 1, "jupyter", c("nbconvert", "--to=pdf", paste0("--output=", pdf_path), subm_path))
+  expect_args(mock_system2, 1, "jupyter", c("nbconvert", "--to=pdf", paste0("--output=", pdf_path), subm_path), stdout = TRUE, stderr = TRUE)
+})
+
+test_that("handles ipynb PDF export failures", {
+  stub(export, "IRdisplay::display_html", mock())
+
+  mock_system2 <- mock()
+  stub(export, "system2", mock_system2)
+
+  stub(export, "file.rename", c(FALSE))
+
+  subm_path <- "my_notebook.ipynb"
+  writeLines(c("This is a notebook!"), subm_path, sep = "")
+  withr::defer(file.remove(subm_path))
+
+  warnings <- capture_warnings({
+    export(subm_path, pdf = TRUE)
+  })
+
+  expect_equal(warnings, c("Could not create a PDF of the submission notebook"))
+
+  expect_equal(length(Sys.glob("*.zip")), 1)
+  zip_path <- Sys.glob("*.zip")[1]
+  withr::defer(file.remove(zip_path))
+
+  # check the zip file contents
+  expect_equal(
+    zip::zip_list(zip_path)$filename,
+    c("__zip_filename__", subm_path))
+
+  # check that __zip_filename__ was deleted
+  expect_false(file.exists("__zip_filename__"))
 })
 
 test_that("supports PDF exports for Rmd files", {

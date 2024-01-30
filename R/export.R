@@ -9,6 +9,7 @@
 #' @param display_link Whether to display a download link with `IRdisplay`
 #' @param pdf Whether to include a PDF of the submission (only works for Rmd and ipynb files)
 #' @param force_save Whether to attempt to force-save the notebook if running on Jupyter
+#' @param debug Whether to stop on PDF generation errors
 #'
 #' @export
 #'
@@ -24,7 +25,8 @@ export <- function(
   export_path = NULL,
   display_link = TRUE,
   pdf = FALSE,
-  force_save = FALSE
+  force_save = FALSE,
+  debug = FALSE
 ) {
   timestamp <- format(Sys.time(), "%Y_%m_%dT%H_%M_%S")
 
@@ -53,12 +55,26 @@ ext <- tools::file_ext(submission_path)
   if (pdf) {
     pdf_path <- paste0(tools::file_path_sans_ext(basename(submission_path)), ".pdf")
     if (ext == "ipynb") {
-      system2("jupyter", c("nbconvert", "--to=pdf", paste0("--output=", pdf_path), submission_path))
+      out <- system2(
+        "jupyter", c("nbconvert", "--to=pdf", paste0("--output=", pdf_path), submission_path),
+        stdout = TRUE,
+        stderr = TRUE)
+
+      if (debug && !is.null(attr(out, "status"))) {
+        cat(paste0("nbconvert failed to convert the submission notebook to a PDF: ", paste(out, sep = "\n")))
+        stop("failed to generate PDF; see printed output for details")
+      }
 
       # move the PDF to the working directory because nbconvert outputs it in the directory
       # containing the notebook
       move_from <- paste0(file.path(dirname(submission_path), pdf_path))
-      file.rename(move_from, pdf_path)
+      renamed <- file.rename(move_from, pdf_path)
+      if (!renamed) {
+        warning("Could not create a PDF of the submission notebook")
+
+        # reset pdf_path to NULL so that it's not included in the zip file
+        pdf_path <- NULL
+      }
     } else if (ext == "Rmd") {
       # add metadata to allow errors in the RMarkdown
       new_subm_path <- tempfile(fileext = ".Rmd")
