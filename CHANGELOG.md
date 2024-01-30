@@ -1,6 +1,6 @@
 # Changelog
 
-**v1.4.1 (unreleased):**
+**v1.5.0 (unreleased):**
 
 * Updated `ottr::export` so that notebook PDF generation failures do not prevent zip file creation [#766](https://github.com/ucbds-infra/otter-grader/issues/766)
 * Added the `debug` argument to `ottr::export` to assist in debugging PDF generation failures
