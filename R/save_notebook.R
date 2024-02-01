@@ -24,9 +24,8 @@ save_notebook <- function(nb_path, timeout = 10) {
   IRdisplay::display_javascript("
     if (typeof Jupyter !== 'undefined') {
       Jupyter.notebook.save_checkpoint();
-    }
-    else {
-      document.querySelector('[data-command=\"docmanager:save\"]').click();
+    } else if ('__ottr_force_save_labextension_force_save' in window) {
+      window.__ottr_force_save_labextension_force_save();
     }
   ")
 
