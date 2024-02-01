@@ -34,3 +34,5 @@ Suggests:
   withr,
   IRkernel
 Config/testthat/edition: 3
+URL: https://github.com/ucbds-infra/ottr
+BugReports: https://github.com/ucbds-infra/otter-grader/issues
