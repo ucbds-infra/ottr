@@ -9,7 +9,8 @@ export(
   export_path = NULL,
   display_link = TRUE,
   pdf = FALSE,
-  force_save = FALSE
+  force_save = FALSE,
+  debug = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ export(
 \item{pdf}{Whether to include a PDF of the submission (only works for Rmd and ipynb files)}
 
 \item{force_save}{Whether to attempt to force-save the notebook if running on Jupyter}
+
+\item{debug}{Whether to stop on PDF generation errors}
 }
 \description{
 Export a submission to a zip file for submitting. If indicated, a PDF of the
