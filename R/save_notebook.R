@@ -26,8 +26,6 @@ save_notebook <- function(nb_path, timeout = 10) {
       Jupyter.notebook.save_checkpoint();
     } else if ('__ottr_force_save_labextension_force_save' in window) {
       window.__ottr_force_save_labextension_force_save();
-    } else {
-      alert('ottr_force_save_labextension\\'s force-save hook was not found. Make sure you have installed ottr_force_save_labextension.');
     }
   ")
 
