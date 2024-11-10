@@ -1,5 +1,9 @@
 # Changelog
 
+**v1.5.1:**
+
+* Updated package tests to fix issues caused by changes in how testthat truncates nyumbers
+
 **v1.5.0:**
 
 * Updated `ottr::export` so that notebook PDF generation failures do not prevent zip file creation [#766](https://github.com/ucbds-infra/otter-grader/issues/766)
