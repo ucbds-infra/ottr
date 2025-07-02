@@ -85,7 +85,8 @@ ext <- tools::file_ext(submission_path)
         readLines(submission_path))
       writeLines(contents, new_subm_path)
 
-      rmarkdown::render(new_subm_path, "pdf_document", pdf_path, dirname(submission_path))
+      subm_dir <- tools::file_path_as_absolute(dirname(submission_path))
+      rmarkdown::render(new_subm_path, "pdf_document", pdf_path, subm_dir, knit_root_dir = subm_dir)
       file.remove(new_subm_path)
     } else {
       stop("Only Rmd and ipynb files can be converted to PDFs")

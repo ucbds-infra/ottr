@@ -1,6 +1,6 @@
 Package: ottr
 Title: An R Autograding Extension for Otter-Grader
-Version: 1.5.1
+Version: 1.5.2
 Authors@R: c(
     person(given = "Christopher",
            family = "Pyles",
@@ -16,7 +16,7 @@ Description:
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Depends:
     R (>= 4.0.0)
 Imports:
