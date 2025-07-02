@@ -133,7 +133,8 @@ test_that("supports PDF exports for Rmd files", {
 
   # check that IRdisplay::display_html was called
   expect_called(mock_render, 1)
-  expect_args(mock_render, 1, tempfile_path, "pdf_document", pdf_path, dirname(subm_path))
+  subm_dir <- tools::file_path_as_absolute(dirname(subm_path))
+  expect_args(mock_render, 1, tempfile_path, "pdf_document", pdf_path, subm_dir, knit_root_dir = subm_dir)
 })
 
 test_that("supports force-saving notebook files", {
