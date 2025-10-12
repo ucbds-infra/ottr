@@ -1,5 +1,9 @@
 # Changelog
 
+**v1.5.3:**
+
+* Updated tests to handle new testthat version
+
 **v1.5.2:**
 
 * Updated `ottr::export` to set the knitr root directory to the submission directory per [#930](https://github.com/ucbds-infra/otter-grader/issues/930)

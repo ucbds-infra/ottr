@@ -39,17 +39,20 @@ test_that("components integrate correctly", {
   run_test(
     passes_all,
     test_path("files", "integration_expected_results", "passes_all.json"),
-    test_path("files", "integration_expected_results_rounding", "passes_all.json"))
+    test_path("files", "integration_expected_results_rounding", "passes_all.json"),
+    test_path("files", "integration_expected_results_new_testthat", "passes_all.json"))
 
   fails_2_hidden <- paste0(passes_all, "\nsquare <- function(x) 1")
   run_test(
     fails_2_hidden,
     test_path("files", "integration_expected_results", "fails_2_hidden.json"),
-    test_path("files", "integration_expected_results_rounding", "fails_2_hidden.json"))
+    test_path("files", "integration_expected_results_rounding", "fails_2_hidden.json"),
+    test_path("files", "integration_expected_results_new_testthat", "fails_2_hidden.json"))
 
   fails_3 <- paste0(passes_all, "\ny <- c(1, 2)")
   run_test(
     fails_3,
     test_path("files", "integration_expected_results", "fails_3.json"),
-    test_path("files", "integration_expected_results_rounding", "fails_3.json"))
+    test_path("files", "integration_expected_results_rounding", "fails_3.json"),
+    test_path("files", "integration_expected_results_new_testthat", "fails_3.json"))
 })
