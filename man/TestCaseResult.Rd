@@ -9,117 +9,127 @@ metadata about the passing/failing of the test case as well as a reference to th
 itself.
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{passed}}{Whether the test passed}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{passed}}{Whether the test passed}
 
-\item{\code{error}}{An error raised by executing the test, if any}
+    \item{\code{error}}{An error raised by executing the test, if any}
 
-\item{\code{test_case}}{The \link{TestCase} that this result tracks}
-}
-\if{html}{\out{</div>}}
+    \item{\code{test_case}}{The \link{TestCase} that this result tracks}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-TestCaseResult-new}{\code{TestCaseResult$new()}}
-\item \href{#method-TestCaseResult-get_score}{\code{TestCaseResult$get_score()}}
-\item \href{#method-TestCaseResult-repr}{\code{TestCaseResult$repr()}}
-\item \href{#method-TestCaseResult-to_list}{\code{TestCaseResult$to_list()}}
-\item \href{#method-TestCaseResult-get_message}{\code{TestCaseResult$get_message()}}
-\item \href{#method-TestCaseResult-clone}{\code{TestCaseResult$clone()}}
-}
+  \itemize{
+    \item \href{#method-TestCaseResult-initialize}{\code{TestCaseResult$new()}}
+    \item \href{#method-TestCaseResult-get_score}{\code{TestCaseResult$get_score()}}
+    \item \href{#method-TestCaseResult-repr}{\code{TestCaseResult$repr()}}
+    \item \href{#method-TestCaseResult-to_list}{\code{TestCaseResult$to_list()}}
+    \item \href{#method-TestCaseResult-get_message}{\code{TestCaseResult$get_message()}}
+    \item \href{#method-TestCaseResult-clone}{\code{TestCaseResult$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-TestCaseResult-new"></a>}}
-\if{latex}{\out{\hypertarget{method-TestCaseResult-new}{}}}
-\subsection{Method \code{new()}}{
-Create a test case result.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$new(passed, error, test_case)}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-TestCaseResult-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCaseResult-initialize}{}}}
+\subsection{\code{TestCaseResult$new()}}{
+  Create a test case result.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCaseResult$new(passed, error, test_case)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{passed}}{Whether the test passed}
+      \item{\code{error}}{An error raised by executing the test, if any}
+      \item{\code{test_case}}{The \code{TestCase} that this result tracks}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{passed}}{Whether the test passed}
-
-\item{\code{error}}{An error raised by executing the test, if any}
-
-\item{\code{test_case}}{The \code{TestCase} that this result tracks}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestCaseResult-get_score"></a>}}
 \if{latex}{\out{\hypertarget{method-TestCaseResult-get_score}{}}}
-\subsection{Method \code{get_score()}}{
-Get the score earned for this test case, accounting for whether the test passed
+\subsection{\code{TestCaseResult$get_score()}}{
+  Get the score earned for this test case, accounting for whether the test passed
 or failed.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$get_score()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCaseResult$get_score()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The score
+  }
 }
 
-\subsection{Returns}{
-The score
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestCaseResult-repr"></a>}}
 \if{latex}{\out{\hypertarget{method-TestCaseResult-repr}{}}}
-\subsection{Method \code{repr()}}{
-Convert this result into a human-readable string for display.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$repr()}\if{html}{\out{</div>}}
+\subsection{\code{TestCaseResult$repr()}}{
+  Convert this result into a human-readable string for display.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCaseResult$repr()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The string representation of this result
+  }
 }
 
-\subsection{Returns}{
-The string representation of this result
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestCaseResult-to_list"></a>}}
 \if{latex}{\out{\hypertarget{method-TestCaseResult-to_list}{}}}
-\subsection{Method \code{to_list()}}{
-Convert this result to a JSON-compatible list with all of its fields.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$to_list()}\if{html}{\out{</div>}}
+\subsection{\code{TestCaseResult$to_list()}}{
+  Convert this result to a JSON-compatible list with all of its fields.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCaseResult$to_list()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The list representation of this result
+  }
 }
 
-\subsection{Returns}{
-The list representation of this result
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestCaseResult-get_message"></a>}}
 \if{latex}{\out{\hypertarget{method-TestCaseResult-get_message}{}}}
-\subsection{Method \code{get_message()}}{
-Get the message to be displayed to the student based on whether the test case
+\subsection{\code{TestCaseResult$get_message()}}{
+  Get the message to be displayed to the student based on whether the test case
 passed or failed, if any.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$get_message()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCaseResult$get_message()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The message or \code{NA}
+  }
 }
 
-\subsection{Returns}{
-The message or \code{NA}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestCaseResult-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-TestCaseResult-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCaseResult$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{TestCaseResult$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCaseResult$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

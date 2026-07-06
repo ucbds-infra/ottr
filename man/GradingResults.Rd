@@ -7,44 +7,46 @@
 A collection of test case results that correspond to a single test file.
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{test_file_results}}{The \link{TestFileResult} objects that make up this grading}
-}
-\if{html}{\out{</div>}}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{test_file_results}}{The \link{TestFileResult} objects that make up this grading}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-GradingResults-new}{\code{GradingResults$new()}}
-\item \href{#method-GradingResults-to_list}{\code{GradingResults$to_list()}}
-\item \href{#method-GradingResults-to_json}{\code{GradingResults$to_json()}}
-\item \href{#method-GradingResults-clone}{\code{GradingResults$clone()}}
-}
+  \itemize{
+    \item \href{#method-GradingResults-initialize}{\code{GradingResults$new()}}
+    \item \href{#method-GradingResults-to_list}{\code{GradingResults$to_list()}}
+    \item \href{#method-GradingResults-to_json}{\code{GradingResults$to_json()}}
+    \item \href{#method-GradingResults-clone}{\code{GradingResults$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-GradingResults-new"></a>}}
-\if{latex}{\out{\hypertarget{method-GradingResults-new}{}}}
-\subsection{Method \code{new()}}{
-Create a grading result.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{GradingResults$new(test_file_results)}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-GradingResults-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-GradingResults-initialize}{}}}
+\subsection{\code{GradingResults$new()}}{
+  Create a grading result.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{GradingResults$new(test_file_results)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{test_file_results}}{The \link{TestFileResult} objects that make up this grading
+result}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{test_file_results}}{The \link{TestFileResult} objects that make up this grading
-result}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-GradingResults-to_list"></a>}}
 \if{latex}{\out{\hypertarget{method-GradingResults-to_list}{}}}
-\subsection{Method \code{to_list()}}{
-Convert these results to a JSON-like \code{list} that can be convert to a
+\subsection{\code{GradingResults$to_list()}}{
+  Convert these results to a JSON-like \code{list} that can be convert to a
 \code{GradingResults} object by Otter's Python library.
 
 The returned list has the JSON format
@@ -57,42 +59,48 @@ The returned list has the JSON format
   ]
 \}
 }\if{html}{\out{</div>}}
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{GradingResults$to_list()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{GradingResults$to_list()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The generated list
+  }
 }
 
-\subsection{Returns}{
-The generated list
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-GradingResults-to_json"></a>}}
 \if{latex}{\out{\hypertarget{method-GradingResults-to_json}{}}}
-\subsection{Method \code{to_json()}}{
-Export these results to a JSON string.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{GradingResults$to_json()}\if{html}{\out{</div>}}
+\subsection{\code{GradingResults$to_json()}}{
+  Export these results to a JSON string.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{GradingResults$to_json()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The JSON string
+  }
 }
 
-\subsection{Returns}{
-The JSON string
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-GradingResults-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-GradingResults-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{GradingResults$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{GradingResults$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{GradingResults$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -11,3 +11,4 @@
 ^\.github$
 ^environment\.yml$
 \.ipynb_checkpoints
+^\.jj$

@@ -7,117 +7,127 @@
 A collection of test case results that correspond to a single test file.
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{test_case_results}}{The \link{TestCaseResult} objects that make up this test file}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{test_case_results}}{The \link{TestCaseResult} objects that make up this test file}
 
-\item{\code{filename}}{The name of the test file}
+    \item{\code{filename}}{The name of the test file}
 
-\item{\code{points}}{The point value of the test file or a list of test case point values}
-}
-\if{html}{\out{</div>}}
+    \item{\code{points}}{The point value of the test file or a list of test case point values}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-TestFileResult-new}{\code{TestFileResult$new()}}
-\item \href{#method-TestFileResult-get_basename}{\code{TestFileResult$get_basename()}}
-\item \href{#method-TestFileResult-get_score}{\code{TestFileResult$get_score()}}
-\item \href{#method-TestFileResult-repr}{\code{TestFileResult$repr()}}
-\item \href{#method-TestFileResult-to_list}{\code{TestFileResult$to_list()}}
-\item \href{#method-TestFileResult-clone}{\code{TestFileResult$clone()}}
-}
+  \itemize{
+    \item \href{#method-TestFileResult-initialize}{\code{TestFileResult$new()}}
+    \item \href{#method-TestFileResult-get_basename}{\code{TestFileResult$get_basename()}}
+    \item \href{#method-TestFileResult-get_score}{\code{TestFileResult$get_score()}}
+    \item \href{#method-TestFileResult-repr}{\code{TestFileResult$repr()}}
+    \item \href{#method-TestFileResult-to_list}{\code{TestFileResult$to_list()}}
+    \item \href{#method-TestFileResult-clone}{\code{TestFileResult$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-TestFileResult-new"></a>}}
-\if{latex}{\out{\hypertarget{method-TestFileResult-new}{}}}
-\subsection{Method \code{new()}}{
-Create a test file result.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$new(filename, test_case_results, points = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-TestFileResult-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-TestFileResult-initialize}{}}}
+\subsection{\code{TestFileResult$new()}}{
+  Create a test file result.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestFileResult$new(filename, test_case_results, points = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{filename}}{The name of the test file}
+      \item{\code{test_case_results}}{The \link{TestCaseResult} objects that make up this test file}
+      \item{\code{points}}{The point value of the test file or a list of test case point values}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{filename}}{The name of the test file}
-
-\item{\code{test_case_results}}{The \link{TestCaseResult} objects that make up this test file}
-
-\item{\code{points}}{The point value of the test file or a list of test case point values}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestFileResult-get_basename"></a>}}
 \if{latex}{\out{\hypertarget{method-TestFileResult-get_basename}{}}}
-\subsection{Method \code{get_basename()}}{
-Get the basename of the file this result corresponds to.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$get_basename()}\if{html}{\out{</div>}}
+\subsection{\code{TestFileResult$get_basename()}}{
+  Get the basename of the file this result corresponds to.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestFileResult$get_basename()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The basename of the test file
+  }
 }
 
-\subsection{Returns}{
-The basename of the test file
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestFileResult-get_score"></a>}}
 \if{latex}{\out{\hypertarget{method-TestFileResult-get_score}{}}}
-\subsection{Method \code{get_score()}}{
-Get the total score earned for this test file as a percentage. Uses
+\subsection{\code{TestFileResult$get_score()}}{
+  Get the total score earned for this test file as a percentage. Uses
 \code{\link[=TestCaseResult]{TestCaseResult$get_score()}} to determine the points earned for each test
 case.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$get_score()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestFileResult$get_score()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The score as a percentage.
+  }
 }
 
-\subsection{Returns}{
-The score as a percentage.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestFileResult-repr"></a>}}
 \if{latex}{\out{\hypertarget{method-TestFileResult-repr}{}}}
-\subsection{Method \code{repr()}}{
-Convert this result into a human-readable string for display.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$repr()}\if{html}{\out{</div>}}
+\subsection{\code{TestFileResult$repr()}}{
+  Convert this result into a human-readable string for display.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestFileResult$repr()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The string representation of this result
+  }
 }
 
-\subsection{Returns}{
-The string representation of this result
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestFileResult-to_list"></a>}}
 \if{latex}{\out{\hypertarget{method-TestFileResult-to_list}{}}}
-\subsection{Method \code{to_list()}}{
-Convert this result to a JSON-compatible list with all of its fields.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$to_list()}\if{html}{\out{</div>}}
+\subsection{\code{TestFileResult$to_list()}}{
+  Convert this result to a JSON-compatible list with all of its fields.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestFileResult$to_list()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The list representation of this result
+  }
 }
 
-\subsection{Returns}{
-The list representation of this result
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestFileResult-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-TestFileResult-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestFileResult$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{TestFileResult$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestFileResult$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

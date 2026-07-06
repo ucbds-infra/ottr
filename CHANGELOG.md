@@ -1,5 +1,10 @@
 # Changelog
 
+**v1.6.0:**
+
+* Added support for Quarto files
+* Added `requireNamespace` checks for `Suggests` dependencies
+
 **v1.5.3:**
 
 * Updated tests to handle new testthat version

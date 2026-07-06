@@ -64,7 +64,7 @@ test_that("supports PDF exports for ipynb files", {
   # check that __zip_filename__ was deleted
   expect_false(file.exists("__zip_filename__"))
 
-  # check that IRdisplay::display_html was called
+  # check that system2 was called
   expect_called(mock_system2, 1)
   expect_args(mock_system2, 1, "jupyter", c("nbconvert", "--to=pdf", paste0("--output=", pdf_path), subm_path), stdout = TRUE, stderr = TRUE)
 })
@@ -131,10 +131,68 @@ test_that("supports PDF exports for Rmd files", {
   # check that __zip_filename__ was deleted
   expect_false(file.exists("__zip_filename__"))
 
-  # check that IRdisplay::display_html was called
+  # check that render was called
   expect_called(mock_render, 1)
   subm_dir <- tools::file_path_as_absolute(dirname(subm_path))
   expect_args(mock_render, 1, tempfile_path, "pdf_document", pdf_path, subm_dir, knit_root_dir = subm_dir)
+})
+
+test_that("supports PDF exports for qmd files", {
+  stub(export, "IRdisplay::display_html", mock())
+
+  mock_render <- mock()
+  stub(export, "quarto::quarto_render", mock_render)
+
+  tempdir_path <- withr::local_tempdir()
+  stub(export, "tempfile", tempdir_path)
+
+  mock_create_dir <- mock()
+  stub(export, "dir.create", mock_create_dir)
+
+  subm_path <- "my_submission.qmd"
+  writeLines(c("This is a qmd file!\n"), subm_path, sep = "")
+  withr::defer(file.remove(subm_path))
+
+  pdf_path <- get_pdf_path(subm_path)
+  pdf_tempdir_path <- file.path(tempdir_path, basename(pdf_path))
+  # export will copy the PDF from the tempdir to the output dir, so we write the stubbed PDF to the
+  # tempdir and clean up the PDF from the output dir.
+  writeLines(c("This is a pdf!"), pdf_tempdir_path, sep = "")
+  withr::defer(file.remove(pdf_path))
+
+  export(subm_path, pdf = TRUE)
+
+  expect_equal(length(Sys.glob("*.zip")), 1)
+  zip_path <- Sys.glob("*.zip")[1]
+  withr::defer(file.remove(zip_path))
+
+  # check the zip file contents
+  expect_equal(
+    zip::zip_list(zip_path)$filename,
+    c("__zip_filename__", subm_path, pdf_path))
+
+  # check that dir.create was called
+  expect_called(mock_create_dir, 1)
+  expect_args(mock_create_dir, 1, tempdir_path)
+
+  # check that the PDF was copied from the tempdir to pdf_path
+  expect_true(file.exists(pdf_path))
+
+  # check that __zip_filename__ was deleted
+  expect_false(file.exists("__zip_filename__"))
+
+  # check that render was called
+  expect_called(mock_render, 1)
+  expect_args(
+    mock_render,
+    1,
+    file.path(tempdir_path, basename(subm_path)),
+    output_format = "pdf",
+    output_file = basename(pdf_path),
+    metadata = list(execute = list(error = TRUE)))
+
+  # check that export cleaned up the tempdir
+  expect_false(dir.exists(tempdir_path))
 })
 
 test_that("supports force-saving notebook files", {

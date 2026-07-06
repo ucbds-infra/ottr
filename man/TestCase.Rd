@@ -15,110 +15,113 @@ env$q1.ans = TRUE
 tc$run(env)
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{name}}{The name of the test case}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{name}}{The name of the test case}
 
-\item{\code{code}}{The code to be executed as part of the test case}
+    \item{\code{code}}{The code to be executed as part of the test case}
 
-\item{\code{points}}{The point value of the test case}
+    \item{\code{points}}{The point value of the test case}
 
-\item{\code{hidden}}{Whether the test case is hidden}
+    \item{\code{hidden}}{Whether the test case is hidden}
 
-\item{\code{success_message}}{A message to show to students if the test passes}
+    \item{\code{success_message}}{A message to show to students if the test passes}
 
-\item{\code{failure_message}}{A message to show to students if the test fails}
-}
-\if{html}{\out{</div>}}
+    \item{\code{failure_message}}{A message to show to students if the test fails}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-TestCase-new}{\code{TestCase$new()}}
-\item \href{#method-TestCase-run}{\code{TestCase$run()}}
-\item \href{#method-TestCase-to_list}{\code{TestCase$to_list()}}
-\item \href{#method-TestCase-clone}{\code{TestCase$clone()}}
-}
+  \itemize{
+    \item \href{#method-TestCase-initialize}{\code{TestCase$new()}}
+    \item \href{#method-TestCase-run}{\code{TestCase$run()}}
+    \item \href{#method-TestCase-to_list}{\code{TestCase$to_list()}}
+    \item \href{#method-TestCase-clone}{\code{TestCase$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-TestCase-new"></a>}}
-\if{latex}{\out{\hypertarget{method-TestCase-new}{}}}
-\subsection{Method \code{new()}}{
-Create a test case.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCase$new(
+\if{html}{\out{<a id="method-TestCase-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-TestCase-initialize}{}}}
+\subsection{\code{TestCase$new()}}{
+  Create a test case.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCase$new(
   name,
   code,
   points = 1,
   hidden = FALSE,
   success_message = NA,
   failure_message = NA
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{name}}{The name of the test case}
+      \item{\code{code}}{The code to be executed as part of the test case}
+      \item{\code{points}}{The point value of the test case}
+      \item{\code{hidden}}{Whether the test case is hidden}
+      \item{\code{success_message}}{A message to show to students if the test passes}
+      \item{\code{failure_message}}{A message to show to students if the test fails}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{The name of the test case}
-
-\item{\code{code}}{The code to be executed as part of the test case}
-
-\item{\code{points}}{The point value of the test case}
-
-\item{\code{hidden}}{Whether the test case is hidden}
-
-\item{\code{success_message}}{A message to show to students if the test passes}
-
-\item{\code{failure_message}}{A message to show to students if the test fails}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestCase-run"></a>}}
 \if{latex}{\out{\hypertarget{method-TestCase-run}{}}}
-\subsection{Method \code{run()}}{
-Run the test case against the provided environment.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCase$run(env)}\if{html}{\out{</div>}}
+\subsection{\code{TestCase$run()}}{
+  Run the test case against the provided environment.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCase$run(env)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{env}}{The environment to run the test case in}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{env}}{The environment to run the test case in}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestCase-to_list"></a>}}
 \if{latex}{\out{\hypertarget{method-TestCase-to_list}{}}}
-\subsection{Method \code{to_list()}}{
-Convert this test case to a JSON-compatible list with all of its fields.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCase$to_list()}\if{html}{\out{</div>}}
+\subsection{\code{TestCase$to_list()}}{
+  Convert this test case to a JSON-compatible list with all of its fields.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCase$to_list()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The list representation of this test case
+  }
 }
 
-\subsection{Returns}{
-The list representation of this test case
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TestCase-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-TestCase-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TestCase$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{TestCase$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{TestCase$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

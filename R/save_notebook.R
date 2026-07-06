@@ -19,6 +19,10 @@ save_notebook <- function(nb_path, timeout = 10) {
     return(TRUE)
   }
 
+  if (!requireNamespace("IRdisplay", quietly = TRUE)) {
+    stop("IRdisplay is not installed")
+  }
+
   orig_mod_time = file.mtime(nb_path)
   start = Sys.time()
   IRdisplay::display_javascript("

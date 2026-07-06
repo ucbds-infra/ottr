@@ -20,7 +20,7 @@ export(
 
 \item{display_link}{Whether to display a download link with \code{IRdisplay}}
 
-\item{pdf}{Whether to include a PDF of the submission (only works for Rmd and ipynb files)}
+\item{pdf}{Whether to include a PDF of the submission (only works for Rmd, Quarto, and ipynb files)}
 
 \item{force_save}{Whether to attempt to force-save the notebook if running on Jupyter}
 
@@ -28,8 +28,8 @@ export(
 }
 \description{
 Export a submission to a zip file for submitting. If indicated, a PDF of the
-submission is generated and included in the zip file. (PDF generation is only supported for Rmd
-and ipynb files.)
+submission is generated and included in the zip file. (PDF generation is only supported for Rmd,
+Quarto, and ipynb files.)
 }
 \examples{
 \dontrun{

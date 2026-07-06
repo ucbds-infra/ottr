@@ -1,13 +1,13 @@
 #' Export a submission to a zip file
 #'
 #' @description Export a submission to a zip file for submitting. If indicated, a PDF of the
-#' submission is generated and included in the zip file. (PDF generation is only supported for Rmd
-#' and ipynb files.)
+#' submission is generated and included in the zip file. (PDF generation is only supported for Rmd,
+#'  Quarto, and ipynb files.)
 #'
 #' @param submission_path The path to the submission
 #' @param export_path The path at which to write the zip file (optional)
 #' @param display_link Whether to display a download link with `IRdisplay`
-#' @param pdf Whether to include a PDF of the submission (only works for Rmd and ipynb files)
+#' @param pdf Whether to include a PDF of the submission (only works for Rmd, Quarto, and ipynb files)
 #' @param force_save Whether to attempt to force-save the notebook if running on Jupyter
 #' @param debug Whether to stop on PDF generation errors
 #'
@@ -35,7 +35,7 @@ export <- function(
     export_path <- paste0(subm_name, "_", timestamp, ".zip")
   }
 
-ext <- tools::file_ext(submission_path)
+  ext <- tools::file_ext(submission_path)
   if (force_save) {
     if (ext != "ipynb") {
       stop("Force save can only be used on ipynb files")
@@ -78,6 +78,10 @@ ext <- tools::file_ext(submission_path)
         pdf_path <- NULL
       }
     } else if (ext == "Rmd") {
+      if (!requireNamespace("rmarkdown", quietly = TRUE)) {
+        stop("rmarkdown is not installed")
+      }
+
       # add metadata to allow errors in the RMarkdown
       new_subm_path <- tempfile(fileext = ".Rmd")
       contents <- c(
@@ -88,8 +92,34 @@ ext <- tools::file_ext(submission_path)
       subm_dir <- tools::file_path_as_absolute(dirname(submission_path))
       rmarkdown::render(new_subm_path, "pdf_document", pdf_path, subm_dir, knit_root_dir = subm_dir)
       file.remove(new_subm_path)
+    } else if (ext == "qmd") {
+      if (!requireNamespace("quarto", quietly = TRUE)) {
+        stop("quarto is not installed")
+      }
+
+      # Create a new temp directory to work in; this will be created under the R session's temp directory.
+      td <- tempfile(pattern = "ottr_")
+      dir.create(td)
+
+      # Copy the qmd file to a temporary directory so that Quarto doesn't overwrite anything in
+      # the source directory when it generates the PDF (since it always writes the output file to
+      # the same directory as the input file).
+      in_file <- file.path(td, basename(submission_path))
+      file.copy(submission_path, in_file)
+
+      pdf_name <- basename(pdf_path)
+      quarto::quarto_render(
+        in_file,
+        output_format = "pdf",
+        output_file = pdf_name,
+        metadata = list(execute = list(error = TRUE)))
+
+      # Quarto writes the output to the same directory that contains the input, so move the PDF
+      # from td to the desired location.
+      file.rename(file.path(td, pdf_name), pdf_path)
+      fs::dir_delete(td)
     } else {
-      stop("Only Rmd and ipynb files can be converted to PDFs")
+      stop("Only Rmd, qmd, and ipynb files can be converted to PDFs")
     }
   }
 
@@ -105,6 +135,9 @@ ext <- tools::file_ext(submission_path)
   file.remove(zip_filename_file_name)
 
   if (display_link && running_on_jupyter()) {
+    if (!requireNamespace("IRdisplay", quietly = TRUE)) {
+      stop("IRdisplay is not installed")
+    }
     IRdisplay::display_html(sprintf("
     <p>Your submission has been exported. Click <a href='%s' download='%s'
     target='_blank'>here</a> to download the zip file.</p>

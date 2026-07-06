@@ -44,5 +44,8 @@ valid_syntax <- function(script) {
 #' running_on_jupyter()
 #' }
 running_on_jupyter <- function() {
+  if (!requireNamespace("IRkernel", quietly = TRUE)) {
+    stop("IRkernel is not installed")
+  }
   return(!is.null(IRkernel::comm_manager()))
 }

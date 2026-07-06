@@ -7,76 +7,84 @@
 A collection of test file results created while grading an assignment
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{test_file_results}}{The \link{TestFileResult} objects created during grading}
-}
-\if{html}{\out{</div>}}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{test_file_results}}{The \link{TestFileResult} objects created during grading}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-CheckCollector-new}{\code{CheckCollector$new()}}
-\item \href{#method-CheckCollector-add_result}{\code{CheckCollector$add_result()}}
-\item \href{#method-CheckCollector-get_results}{\code{CheckCollector$get_results()}}
-\item \href{#method-CheckCollector-clone}{\code{CheckCollector$clone()}}
-}
+  \itemize{
+    \item \href{#method-CheckCollector-initialize}{\code{CheckCollector$new()}}
+    \item \href{#method-CheckCollector-add_result}{\code{CheckCollector$add_result()}}
+    \item \href{#method-CheckCollector-get_results}{\code{CheckCollector$get_results()}}
+    \item \href{#method-CheckCollector-clone}{\code{CheckCollector$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-CheckCollector-new"></a>}}
-\if{latex}{\out{\hypertarget{method-CheckCollector-new}{}}}
-\subsection{Method \code{new()}}{
-Create a \link{CheckCollector}.
+\if{html}{\out{<a id="method-CheckCollector-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-CheckCollector-initialize}{}}}
+\subsection{\code{CheckCollector$new()}}{
+  Create a \link{CheckCollector}.
 Add a \link{TestFileResult} to this collector.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CheckCollector$new()}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CheckCollector$new()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CheckCollector-add_result"></a>}}
 \if{latex}{\out{\hypertarget{method-CheckCollector-add_result}{}}}
-\subsection{Method \code{add_result()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CheckCollector$add_result(test_file_result)}\if{html}{\out{</div>}}
+\subsection{\code{CheckCollector$add_result()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CheckCollector$add_result(test_file_result)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{test_file_result}}{The \link{TestFileResult} to add
+Retrieve the list \link{TestFileResult} objects stored in this collector.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{test_file_result}}{The \link{TestFileResult} to add
-Retrieve the list \link{TestFileResult} objects stored in this collector.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CheckCollector-get_results"></a>}}
 \if{latex}{\out{\hypertarget{method-CheckCollector-get_results}{}}}
-\subsection{Method \code{get_results()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CheckCollector$get_results()}\if{html}{\out{</div>}}
+\subsection{\code{CheckCollector$get_results()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CheckCollector$get_results()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    The list of \link{TestFileResult} objects
+  }
 }
 
-\subsection{Returns}{
-The list of \link{TestFileResult} objects
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-CheckCollector-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-CheckCollector-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CheckCollector$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{CheckCollector$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{CheckCollector$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }
